@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         version="2.5" metadata-complete="true">
+
+  <!-- The following mappings are needed for -->
+  <!-- SimpleServlet and GetOrPostServlet -->
+
+  <servlet>
+    <servlet-name>SimpleServlet</servlet-name>
+    <servlet-class>SimpleServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>GetOrPostServlet</servlet-name>
+    <servlet-class>GetOrPostServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>SimpleServlet</servlet-name>
+    <url-pattern>/servlet/SimpleServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetOrPostServlet</servlet-name>
+    <url-pattern>/servlet/GetOrPostServlet</url-pattern>
+  </servlet-mapping>
+
+</web-app>

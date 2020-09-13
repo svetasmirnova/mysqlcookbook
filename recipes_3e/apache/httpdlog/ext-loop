@@ -1,0 +1,37 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+# Crude timing of relative efficiency of REGEXP versus LIKE for finding
+# URLs with a period in them.  Works better for large httpdlog tables.
+# (Crude because it uses the time printed by mysql, which is wallclock time.)
+
+run_script ("ext-by-regexp", 100);
+run_script ("ext-by-sqlpat", 100);
+
+exit (0);
+
+sub run_script
+{
+my ($script, $reps) = @_;
+my $time = 0;
+
+  for my $i (1 .. $reps)
+  {
+    open (IN, "mysql -vvv cookbook < $script |")
+      or die "Cannot process $script\n";
+    while (<IN>)
+    {
+      if (/\((\d+\.\d+) sec\)/)
+      {
+        #print "$_";
+        #print "$1\n";
+        $time += $1;
+      }
+    }
+    close (IN);
+  }
+  print "Script: $script\n";
+  printf "Total time: %.2f, average: %.2f\n", $time, $time/$reps;
+}

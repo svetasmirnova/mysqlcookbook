@@ -1,0 +1,45 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Change log for recipes distribution (MySQL Cookbook, Third Edition)</title>
+</head>
+<body>
+<h2>Change log for recipes distribution (MySQL Cookbook, Third Edition)</h2>
+<p>This file lists changes to the recipes distribution that accompanies MySQL Cookbook, Third Edition. Changes are listed in reverse chronological order.</p>
+<p>Downloads are available at: <a href="http://www.kitebird.com/mysql-cookbook/">http://www.kitebird.com/mysql-cookbook/</a></p>
+<p><strong>Version 3.01 (2014-07-29)</strong></p>
+<ul>
+<li>
+tomcat/mcb/index.html had a bad link for Simple JSTL page
+(it was simple.jsp, should be simple_jstl.jsp).
+</li>
+<li>
+Corrected the release date for 3.00 distribution to 2014-07-28.
+</li>
+</ul>
+<p><strong>Version 3.00 (2014-07-28)</strong></p>
+<ul>
+<li>
+Initial release of recipes distribution for MySQL Cookbook, Third Edition.
+</li>
+<li>
+I changed the Ruby scripts to remove the -w option from the initial
+#!/usr/bin/ruby line. This option can be useful for finding possible
+problems (as mentioned in Recipe 2.1), but causes more warnings
+with Ruby 1.9 and up than with Ruby 1.8, some of which may originate
+from with libraries that are not easily changed. Removing -w silences
+these warnings.
+</li>
+<li>
+metadata/get_rs_meta.py: In Recipe 10.2, this Python script
+shows how to determine whether a statement produces a result set.
+It originally checked whether there are any columns using this test:
+if cursor.description is None.  Although that works, Connector/Python
+cursor objects have a with_rows property designed for that purpose,
+so the script now uses that property instead. Also, to avoid an
+exception, the code that enumerates cursor.description no longer
+executes if there are no columns.
+</li>
+</ul>
+</body>
+</html>

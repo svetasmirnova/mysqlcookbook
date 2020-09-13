@@ -1,0 +1,27 @@
+<!--
+  To enable MySQL backing store for session managment, make a copy
+  of this file named context.xml and restart Tomcat.
+-->
+<Context path="/mcb" docBase="mcb" debug="0" reloadable="true">
+  <Manager
+    className="org.apache.catalina.session.PersistentManager"
+    debug="0"
+    saveOnRestart="true"
+    maxIdleBackup="600">
+    maxIdleSwap="1200"
+    minIdleSwap="900"
+    <Store
+      className="org.apache.catalina.session.JDBCStore"
+      driverName="com.mysql.jdbc.Driver"
+      connectionURL=
+        "jdbc:mysql://localhost/cookbook?user=cbuser&amp;password=cbpass"
+      sessionTable="tomcat_session"
+      sessionIdCol="id"
+      sessionAppCol="app"
+      sessionDataCol="data"
+      sessionValidCol="valid_session"
+      sessionMaxInactiveCol="max_inactive"
+      sessionLastAccessedCol="update_time"
+    />
+  </Manager>
+</Context>

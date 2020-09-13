@@ -1,0 +1,59 @@
+# These are the directives used in the section on logging Apache through
+# MySQL.  Copy and paste to your httpd.conf as desired.
+
+# Set 1 - without virtual host field
+
+# LogFormat directive to produce tab-delimited lines that include:
+# - date and time, in ISO format
+# - client host
+# - request method
+# - URL path
+# - request status
+# - bytes transferred
+# - the user agent (browser or spider name)
+# - \t means "tab"
+
+#@ _LOGFORMAT_1_
+LogFormat \
+"%{%Y-%m-%d %H:%M:%S}t\t%h\t%m\t%U\t%>s\t%b\t%{Referer}i\t%{User-Agent}i" \
+mysql
+#@ _LOGFORMAT_1_
+
+# Directive to log lines in mysql format to a file (so that you can seee what
+# they look like), or to the httpdlog.pl script (to insert them into MySQL).
+
+#@ _CUSTOMLOG_FILE_1_
+CustomLog /usr/local/apache/logs/test_log mysql
+#@ _CUSTOMLOG_FILE_1_
+#@ _CUSTOMLOG_SCRIPT_1_
+CustomLog "|/usr/local/apache/bin/httpdlog.pl" mysql
+#@ _CUSTOMLOG_SCRIPT_1_
+
+# Set 2 - with virtual host field
+
+# LogFormat directive to produce tab-delimited lines that include:
+# - date and time, in ISO format
+# - virtual host
+# - client host
+# - request method
+# - URL path
+# - request status
+# - bytes transferred
+# - the user agent (browser or spider name)
+# - \t means "tab"
+
+#@ _LOGFORMAT_2_
+LogFormat \
+"%{%Y-%m-%d %H:%M:%S}t\t%v\t%h\t%m\t%U\t%>s\t%b\t%{Referer}i\t%{User-Agent}i" \
+mysql2
+#@ _LOGFORMAT_2_
+
+# Directive to log lines in mysql2 format to a file (so that you can seee what
+# they look like), or to the httpdlog2.pl script (to insert them into MySQL).
+
+#@ _CUSTOMLOG_FILE_2_
+CustomLog /usr/local/apache/logs/test_log2 mysql2
+#@ _CUSTOMLOG_FILE_2_
+#@ _CUSTOMLOG_SCRIPT_2_
+CustomLog "|/usr/local/apache/bin/httpdlog2.pl" mysql2
+#@ _CUSTOMLOG_SCRIPT_2_

@@ -1,0 +1,7 @@
+# hits.sql
+
+#@ _UPDATE_COUNT_
+INSERT INTO hitcount (path,hits) VALUES('some path',LAST_INSERT_ID(1))
+ON DUPLICATE KEY UPDATE hits = LAST_INSERT_ID(hits+1);
+SELECT LAST_INSERT_ID();
+#@ _UPDATE_COUNT_

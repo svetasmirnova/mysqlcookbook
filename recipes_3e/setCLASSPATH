@@ -1,0 +1,65 @@
+if (! $?CLASSPATH) then
+  setenv CLASSPATH "."
+endif
+if (-d /usr/local/lib/mcb) then
+  setenv CLASSPATH ${CLASSPATH}:/usr/local/lib/mcb
+  set x = (`ls /usr/local/lib/mcb/*.jar`)
+  foreach a ($x)
+    setenv CLASSPATH ${CLASSPATH}:$a
+  end
+endif
+if (-d /usr/local/apache/lib/java) then
+  setenv CLASSPATH ${CLASSPATH}:/usr/local/apache/lib/java
+endif
+if (-d /usr/local/lib/java/classes) then
+  setenv CLASSPATH ${CLASSPATH}:/usr/local/lib/java/classes
+endif
+if (-d /usr/local/lib/java/lib) then
+  set x = (`ls /usr/local/lib/java/lib/*.jar`)
+  foreach a ($x)
+    setenv CLASSPATH ${CLASSPATH}:$a
+  end
+endif
+if (`uname` == "Darwin") then
+  set dir=/System/Library/Frameworks/JavaVM.framework
+  setenv CLASSPATH ${CLASSPATH}:$dir/Libraries
+  if (-d $dir/Classes) then
+    foreach a ($dir/Classes/*.jar)
+      setenv CLASSPATH ${CLASSPATH}:$a
+    end
+  endif
+else
+  if (-d /usr/share/kaffe) then
+    foreach a (/usr/share/kaffe/*.jar)
+      setenv CLASSPATH ${CLASSPATH}:$a
+    end
+  endif
+endif
+set dir=""
+if ( -e /opt/tomcat ) then
+  set dir=/opt/tomcat
+else if ( -e /usr/share/tomcat ) then
+  set dir=/usr/share/tomcat
+else if ( -e /usr/share/tomcat-5.5 ) then
+  set dir=/usr/share/tomcat-5.5
+else if ( -e /usr/share/tomcat-5.0 ) then
+  set dir=/usr/share/tomcat-5.0
+else if ( -e /usr/local/tomcat ) then
+  set dir=/usr/local/tomcat
+else if ( -e /src/extern/Java/tomcat ) then
+  set dir=/src/extern/Java/tomcat
+else if ( -e /Users/paul/extern/Java/tomcat ) then
+  set dir=/Users/paul/extern/Java/tomcat
+else if ( -e /usr/share/tomcat-7 ) then
+  set dir=/usr/share/tomcat-7
+else if ( -e /usr/share/tomcat-6 ) then
+  set dir=/usr/share/tomcat-6
+endif
+if ($dir == "") then
+  echo Cannot find Tomcat\!
+else
+  foreach a ($dir/lib/*.jar)
+    setenv CLASSPATH ${CLASSPATH}:$a
+  end
+endif
+echo $CLASSPATH

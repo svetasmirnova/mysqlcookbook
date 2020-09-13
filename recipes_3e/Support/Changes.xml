@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<changelog>
+<book>MySQL Cookbook, Third Edition</book>
+<distribution-id>mcb-3ed</distribution-id>
+<distribution-name>recipes</distribution-name>
+<url>http://www.kitebird.com/mysql-cookbook/</url>
+<downloads>http://www.kitebird.com/mysql-cookbook/</downloads>
+
+<changeset>
+<version>3.01</version>
+<date>2014-07-29</date>
+
+<items>
+<item>
+tomcat/mcb/index.html had a bad link for Simple JSTL page
+(it was simple.jsp, should be simple_jstl.jsp).
+</item>
+<item>
+Corrected the release date for 3.00 distribution to 2014-07-28.
+</item>
+</items>
+</changeset>
+
+<changeset>
+<version>3.00</version>
+<date>2014-07-28</date>
+
+<items>
+<item>
+Initial release of recipes distribution for MySQL Cookbook, Third Edition.
+</item>
+<item>
+I changed the Ruby scripts to remove the -w option from the initial
+#!/usr/bin/ruby line. This option can be useful for finding possible
+problems (as mentioned in Recipe 2.1), but causes more warnings
+with Ruby 1.9 and up than with Ruby 1.8, some of which may originate
+from with libraries that are not easily changed. Removing -w silences
+these warnings.
+</item>
+<item>
+metadata/get_rs_meta.py: In Recipe 10.2, this Python script
+shows how to determine whether a statement produces a result set.
+It originally checked whether there are any columns using this test:
+if cursor.description is None.  Although that works, Connector/Python
+cursor objects have a with_rows property designed for that purpose,
+so the script now uses that property instead. Also, to avoid an
+exception, the code that enumerates cursor.description no longer
+executes if there are no columns.
+</item>
+</items>
+</changeset>
+
+</changelog>
