@@ -2,11 +2,6 @@
 
 # Table to hold verses of the King James Version of the Bible
 
-# Table is created explicitly as MyISAM because any MySQL server
-# should support FULLTEXT indexes for MyISAM tables.  If your server
-# supports FULLTEXT for InnoDB (MySQL 5.6 or higher), you can modify
-# the ENGINE clause to ENGINE = InnoDB.
-
 DROP TABLE IF EXISTS kjv;
 #@ _CREATE_TABLE_
 CREATE TABLE kjv
@@ -18,7 +13,7 @@ CREATE TABLE kjv
   vnum  TINYINT UNSIGNED NOT NULL, # verse number
   vtext TEXT NOT NULL,             # text of verse
   FULLTEXT (vtext)                 # full-text index
-) ENGINE = MyISAM;                 # can be InnoDB for MySQL 5.6+
+);
 #@ _CREATE_TABLE_
 
 # Add other indexes to the kjv table, to help queries that
