@@ -9,6 +9,7 @@ CREATE TABLE `patients` (
   `surname` varchar(255) DEFAULT NULL,
   `gender` enum('F','M') DEFAULT NULL,
   `age` tinyint unsigned DEFAULT NULL,
+  `additional_data` json DEFAULT NULL,
   `diagnosis` varchar(255) DEFAULT NULL,
   `result` enum('R', 'N', 'D') DEFAULT NULL comment 'R=Recovered, N=Not Recovered, D=Dead',
   `date_arrived` date NOT NULL,
