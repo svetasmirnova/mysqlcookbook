@@ -10,7 +10,7 @@ CREATE TABLE `patients` (
   `gender` enum('F','M') DEFAULT NULL,
   `age` tinyint unsigned DEFAULT NULL,
   `diagnosis` varchar(255) DEFAULT NULL,
-  `result` enum('R', 'N', 'D') DEFAULT NULL, -- Recovered, Not Recovered, Dead
+  `result` enum('R', 'N', 'D') DEFAULT NULL comment 'R=Recovered, N=Not Recovered, D=Dead',
   `date_arrived` date NOT NULL,
   `date_departed` date DEFAULT NULL,
   PRIMARY KEY (`id`)
