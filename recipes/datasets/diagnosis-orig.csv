@@ -1,0 +1,10 @@
+<b>Medical</b>,,,<b>Surgical</b>,,
+<b>Key</b>,<b>Diagnosis</b>,<b>Frequency %</b>,<b>Key</b>,<b>Diagnosis</b>,<b>Frequency %</b>
+ACS,Acute coronary syndrome,2.1,Abscess,Abscess (any site),0.7
+ALD,Alcoholic liver disease,0.3,Appendix,Acute appendicitis,0.3
+CAP,Community acquired pneumonia,3.6,Chole,Cholecystitis/ cholangitis,1.1
+COPD,Chronic obstructive pulmonary disease,2.1,ENT,"ENT (ears, nose and throat) (any source)",0.3
+GIB,Gastro-intestinal bleed,0.8,NOF,Femoral neck fracture (NOF),0.9
+HF,Heart failure,0.8,NTICB,Non Traumatic Intra Cranial Bleed,1.4
+Sepsis,Sepsis (any source),0.8,Panc,Acute pancreatitis,0.5
+UTI,Urinary tract infection,2.4,TICB,Traumatic Intra Cranial Bleed,1.0
