@@ -1,65 +1,65 @@
-
 package main
 
 import (
-    "database/sql"
-    "fmt"
-    "log"
+	"database/sql"
+	"fmt"
+	"log"
 
-    _ "github.com/go-sql-driver/mysql"
+	_ "github.com/go-sql-driver/mysql"
 )
 
 type Artist struct {
-    id         int
-    name       string
+	id    int
+	actor string
 }
 
 func main() {
 
-    db, err := sql.Open("mysql", "cbuser:Cbuser2021!@tcp(127.0.0.1:3306)/cookbook")
-    defer db.Close()
+	db, err := sql.Open("mysql", "cbuser:Cbuser2021!@tcp(127.0.0.1:3306)/cookbook?autocommit=false")
+	defer db.Close()
 
-    if err != nil {
-        log.Fatal(err)
-    }
+	if err != nil {
+		log.Fatal(err)
+	}
 
-    sql := "INSERT INTO actors(id,name) values (11,'Dwayne Johnson')"
+	tx, err := db.Begin()
+	sql := "INSERT INTO actors(id,actor) values (0,'Dwayne Johnson')"
 
-    res, err := db.Exec(sql)
-    if err != nil {
-        panic(err.Error())
-    }
+	res, err := db.Exec(sql)
+	if err != nil {
+		panic(err.Error())
+		tx.Rollback()
+	}
 
-    res, err := db.Commit()
+	err = tx.Commit()
 
-    if err != nil {
-        panic(err.Error())
-    }
+	if err != nil {
+		panic(err.Error())
+	}
+	id, err := res.LastInsertId()
+	affectedRows, err := res.RowsAffected()
 
-    affectedRows, err := res.RowsAffected()
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Printf("The insert id %d \n", id)
+	fmt.Printf("The statement affected %d rows\n", affectedRows)
 
-    if err != nil {
-        log.Fatal(err)
-    }
+	sel, err := db.Query("SELECT id,actor FROM actors")
 
-    fmt.Printf("The statement affected %d rows\n", affectedRows)
-    res, err := db.Query("SELECT * FROM actors")
+	if err != nil {
+		log.Fatal(err)
+	}
 
-    defer res.Close()
+	for sel.Next() {
+		var artist Artist
 
-    if err != nil {
-        log.Fatal(err)
-    }
+		err := sel.Scan(&artist.id, &artist.actor)
 
-    for res.Next() {
+		if err != nil {
+			log.Fatal(err)
+		}
 
-        var artist Artist
-        err := res.Scan(&artist.id, &artist.actor)
-
-        if err != nil {
-            log.Fatal(err)
-        }
-
-        fmt.Printf("%v\n", artist)
-    }
+		fmt.Printf("%v\n", artist)
+	}
 }
