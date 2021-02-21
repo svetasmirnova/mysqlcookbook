@@ -4,8 +4,8 @@ DROP TABLE IF EXISTS str_val;
 #@ _CREATE_TABLE_
 CREATE TABLE str_val
 (
-  ci_str   CHAR(3) CHARACTER SET latin1 COLLATE latin1_swedish_ci,
-  cs_str   CHAR(3) CHARACTER SET latin1 COLLATE latin1_general_cs,
+  ci_str   CHAR(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  cs_str   CHAR(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_as_cs,
   bin_str  BINARY(3)
 );
 #@ _CREATE_TABLE_
