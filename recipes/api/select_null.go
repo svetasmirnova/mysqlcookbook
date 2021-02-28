@@ -22,8 +22,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	sql := "SELECT name, COALESCE(birth, '') as birthday from profile WHERE id = 5"
-	//sql := "SELECT name, birth as birthday from profile WHERE id = 9"
+	sql := "SELECT name, COALESCE(birth, '') as birthday from profile WHERE id = 9"
 	res, err := db.Query(sql)
 	defer res.Close()
 
