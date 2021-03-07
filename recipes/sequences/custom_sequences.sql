@@ -11,7 +11,7 @@ CREATE TABLE `sequences` (
   PRIMARY KEY (`sequence_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-delimiter |
+delimiter $$
 
 CREATE PROCEDURE create_sequence( 
     sequence_name VARCHAR(64), start_value BIGINT, increment BIGINT, 
@@ -28,7 +28,7 @@ BEGIN
             COALESCE(start_value, -9223372036854775808), 
             COALESCE(cycle_option, 'no'));
 END
-|
+$$
 
 CREATE FUNCTION sequence_next_value(name varchar(64)) RETURNS BIGINT 
 BEGIN 
@@ -41,10 +41,10 @@ BEGIN
         ) WHERE sequence_name=name;
     RETURN retval; 
 END
-|
+$$
 
 CREATE PROCEDURE delete_sequence(name VARCHAR(64)) 
 DELETE FROM sequences WHERE sequence_name=name
-|
+$$
 
 delimiter ;
