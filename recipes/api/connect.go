@@ -1,3 +1,4 @@
+// connect.go: connect to MySQL server
 package main
 
 import (
@@ -10,7 +11,7 @@ import (
 
 func main() {
 
-    db, err := sql.Open("mysql", "root:Alkin2020!@tcp(127.0.0.1:3306)/cookbook")
+    db, err := sql.Open("mysql", "cbuser:cbpass@tcp(127.0.0.1:3306)/cookbook")
     defer db.Close()
 
     if err != nil {

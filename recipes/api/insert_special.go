@@ -1,3 +1,4 @@
+// insert_special.go : Inserting special values to table.
 package main
 
 import (
@@ -8,15 +9,40 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
+type Profile profile {
+	name  string
+	birth string
+	color string
+	foods string
+	cats  int
+}
+
+func insert(db *sql.DB, p profile) error {
+	sql := "INSERT INTO profile(name, birth, color, foods, cats) VALUES (?, ?, ?, ?, ?)"
+	stmt, err := db.PrepareContext(sql)
+	if err != nil {
+		log.Printf("Error %s when preparing SQL statement", err)
+		return err
+	}
+	defer stmt.Close()
+}
+
 func main() {
 
-	db, err := sql.Open("mysql", "cbuser:Cbuser2021!@tcp(127.0.0.1:3306)/cookbook")
+	db, err := sql.Open("mysql", "cbuser:cbpass@tcp(127.0.0.1:3306)/cookbook")
 	defer db.Close()
 
-	sql := "INSERT INTO profile (name,birth,color,foods,cats) VALUES ('De\\'Mont','1973-01-12', null,'eggroll',4)"
-	res, err := db.Exec(sql)
+	p := profile{
+		name:  "askdba",
+		birth: 1975,
+		color: "null",
+		foods: "null",
+		cats:  0,
+	}
+	err = insert(db, p)
 	if err != nil {
-		panic(err.Error())
+		log.Printf("Insert product failed with error %s", err)
+		return
 	}
 
 	affectedRows, err := res.RowsAffected()

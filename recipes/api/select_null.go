@@ -1,3 +1,4 @@
+// select_null.go : Selecting NULL values in Golang
 package main
 
 import (
@@ -15,7 +16,7 @@ type Profile struct {
 
 func main() {
 
-	db, err := sql.Open("mysql", "cbuser:Cbuser2021!@tcp(127.0.0.1:3306)/cookbook")
+	db, err := sql.Open("mysql", "cbuser:cbpass@tcp(127.0.0.1:3306)/cookbook")
 	defer db.Close()
 
 	if err != nil {

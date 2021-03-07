@@ -1,3 +1,4 @@
+// connect_tcpport.go : Connect MySQL server using tcp port number
 package main
 
 import (

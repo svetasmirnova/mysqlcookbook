@@ -1,3 +1,4 @@
+// connect_socket.go : Connect MySQL server using socket
 package main
 
 import (
@@ -9,7 +10,7 @@ import (
 )
 
 func main() {
-   db, err := sql.Open("mysql","root:Alkin2020!@unix(/tmp/mysql.sock)/cookbook?charset=utf8")
+   db, err := sql.Open("mysql","cbuser:cbpass@unix(/tmp/mysql.sock)/cookbook?charset=utf8")
     defer db.Close()
 
     if err != nil {
