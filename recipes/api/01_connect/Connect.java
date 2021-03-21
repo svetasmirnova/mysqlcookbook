@@ -13,7 +13,6 @@ public class Connect
 
     try
     {
-      Class.forName ("com.mysql.jdbc.Driver").newInstance ();
       conn = DriverManager.getConnection (url, userName, password);
       System.out.println ("Connected");
     }
