@@ -14,7 +14,6 @@ public class Connect2
 
     try
     {
-      Class.forName ("com.mysql.jdbc.Driver").newInstance ();
       conn = DriverManager.getConnection (url);
       System.out.println ("Connected");
     }

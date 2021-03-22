@@ -20,7 +20,6 @@ public class Error
 
     try
     {
-      Class.forName ("com.mysql.jdbc.Driver").newInstance ();
       conn = DriverManager.getConnection (url, userName, password);
       System.out.println ("Connected");
       tryQuery (conn);    // issue a query

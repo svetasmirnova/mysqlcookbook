@@ -1,12 +1,10 @@
 #@ _JAVA_DB_
-Class.forName ("com.mysql.jdbc.Driver").newInstance ();
 conn = DriverManager.getConnection (
             "jdbc:mysql://localhost/cookbook", // URL
             "cbuser",                          // username
             "cbpass");                         // password
 #@ _JAVA_DB_
 #@ _JAVA_NO_DB_
-Class.forName ("com.mysql.jdbc.Driver").newInstance ();
 conn = DriverManager.getConnection (
             "jdbc:mysql://localhost/", // URL
             "cbuser",                  // username

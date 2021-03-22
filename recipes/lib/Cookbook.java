@@ -25,7 +25,6 @@ public class Cookbook
     String user = "cbuser";
     String password = "cbpass";
 
-    Class.forName ("com.mysql.jdbc.Driver").newInstance ();
     return (DriverManager.getConnection (url, user, password));
   }
 //#@ _PART_2_
@@ -53,7 +52,6 @@ public class Cookbook
     password = props.getProperty ("password", "");
 
     String url = "jdbc:mysql://" + host + "/" + database;
-    Class.forName ("com.mysql.jdbc.Driver").newInstance ();
     return (DriverManager.getConnection (url, user, password));
   }
 //#@ _PROPS_CONNECT_

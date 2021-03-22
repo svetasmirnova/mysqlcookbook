@@ -32,7 +32,6 @@ public class ReadPropsFile
             + "/cookbook"
             + "?user=" + props.getProperty ("user")
             + "&password=" + props.getProperty ("password");
-      Class.forName ("com.mysql.jdbc.Driver").newInstance ();
       conn = DriverManager.getConnection (url);
       System.out.println ("Connected");
     }

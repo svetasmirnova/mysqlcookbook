@@ -55,7 +55,6 @@ public class Cmdline
       if (hostName == null)
         hostName = "";
       url = "jdbc:mysql://" + hostName + "/cookbook";
-      Class.forName ("com.mysql.jdbc.Driver").newInstance ();
       conn = DriverManager.getConnection (url, userName, password);
       System.out.println ("Connected");
     }
