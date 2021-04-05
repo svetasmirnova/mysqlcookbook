@@ -1,0 +1,23 @@
+root:0:0:root:/root:/bin/bash
+bin:1:1:bin:/bin:
+daemon:2:2:daemon:/sbin:
+adm:3:4:adm:/var/adm:
+lp:4:7:lp:/var/spool/lpd:
+sync:5:0:sync:/sbin:/bin/sync
+shutdown:6:0:shutdown:/sbin:/sbin/shutdown
+halt:7:0:halt:/sbin:/sbin/halt
+mail:8:12:mail:/var/spool/mail:
+news:9:13:news:/var/spool/news:
+uucp:10:14:uucp:/var/spool/uucp:
+operator:11:0:operator:/root:
+games:12:100:games:/usr/games:
+gopher:13:30:gopher:/usr/lib/gopher-data:
+ftp:14:50:FTP User:/home/ftp:
+nobody:99:99:Nobody:/:
+xfs:43:43:X Font Server:/etc/X11/fs:/bin/false
+named:25:25:Named:/var/named:/bin/false
+gdm:42:42::/home/gdm:/bin/bash
+piranha:60:60::/home/httpd/html/piranha:/dev/null
+postgres:26:26:PostgreSQL Server:/var/lib/pgsql:/bin/bash
+pvm:24:24::/usr/share/pvm3:/bin/bash
+squid:23:23::/var/spool/squid:/dev/null
