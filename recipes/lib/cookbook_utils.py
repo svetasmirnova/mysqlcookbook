@@ -255,7 +255,6 @@ def is_leap_year(year):
 
 #@ _IS_VALID_DATE_
 def is_valid_date(year, month, day):
-  print(year, month, day)
   if year < 0 or month < 0 or day < 1:
     return 0
   if year > 9999 or month > 12 or day > days_in_month(year, month):
