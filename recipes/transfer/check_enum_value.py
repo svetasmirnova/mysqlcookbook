@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # check_enum_value.py: Wrapper to demonstrate check_enum_value()
 # utility function that determines whether a value is a member of
 # a given ENUM column.

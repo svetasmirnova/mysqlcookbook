@@ -80,7 +80,7 @@ def get_enumorset_info(conn, db_name, tbl_name, col_name):
   # create dictionary to hold column information
   info = {'name': row[0]}
   # get data type string; make sure it begins with ENUM or SET
-  s = row[1]
+  s = row[1].decode()
   p = re.compile("(ENUM|SET)\((.*)\)$", re.IGNORECASE)
   match = p.match(s)
   if not match: # not ENUM or SET
@@ -109,13 +109,9 @@ def check_enum_value(conn, db_name, tbl_name, col_name, val):
   info = get_enumorset_info(conn, db_name, tbl_name, col_name)
   if info is not None and info['type'].upper() == 'ENUM':
     # use case-insensitive comparison because default collation
-    # (latin1_swedish_ci) is case-insensitive (adjust if you use
+    # (utf8mb4_0900_ai_ci) is case-insensitive (adjust if you use
     # a different collation)
-    val = val.upper()
-    for v in info['values']:
-      if val == v.upper():
-        valid = 1
-        break
+    valid = 1 if list(map(lambda v: v.upper(), info['values'])).count(val.upper()) > 0 else 0
   return valid
 #@ _CHECK_ENUM_VALUE_
 
@@ -129,7 +125,20 @@ def check_enum_value(conn, db_name, tbl_name, col_name, val):
 
 #@ _CHECK_SET_VALUE_
 def check_set_value(conn, db_name, tbl_name, col_name, val):
-  pass
+  valid = 0
+  info = get_enumorset_info(conn, db_name, tbl_name, col_name)
+  if info is not None and info['type'].upper() == 'SET':
+    if val == "":
+      return 1 # empty string is legal element
+    # use case-insensitive comparison because default collation
+    # (utf8mb4_0900_ai_ci) is case-insensitive (adjust if you use
+    # a different collation)
+    valid = 1  # assume valid until we find out otherwise
+    for v in val.split(','):
+      if list(map(lambda x: x.upper(), info['values'])).count(v.upper()) <= 0:
+        valid = 0
+        break
+  return valid
 #@ _CHECK_SET_VALUE_
 
 
@@ -187,17 +196,19 @@ def is_innings_pitched(val):
 #@ _IS_ISO_DATE_
 def is_iso_date(val):
   m = re.match('^(\d{2,4})\D(\d{1,2})\D(\d{1,2})$', val)
-  return [m.group(1),  m.group(2), m.group(3)] if m else None
+  return [int(m.group(1)),  int(m.group(2)), int(m.group(3))] if m else None
 #@ _IS_ISO_DATE_
 
 #@ _IS_MMDDYY_DATE_
 def is_mmddyy_date(val):
-  pass
+  m = re.match('^(\d{1,2})\D(\d{1,2})\D(\d{2,4})$', val)
+  return [int(m.group(3)),  int(m.group(1)), int(m.group(2))] if m else None
 #@ _IS_MMDDYY_DATE_
 
 #@ _IS_DDMMYY_DATE_
 def is_ddmmyy_date(val):
-  pass
+  m = re.match('^(\d{1,2})\D(\d{1,2})\D(\d{2,4})$', val)
+  return [int(m.group(3)),  int(m.group(2)), int(m.group(1))] if m else None
 #@ _IS_DDMMYY_DATE_
 
 # Functions to check whether a string looks like a time in 24-hour
@@ -209,7 +220,10 @@ def is_ddmmyy_date(val):
 
 #@ _IS_24HR_TIME_
 def is_24hr_time(val):
-  pass
+  m = re.match('^(\d{1,2})\D(\d{2})\D(\d{2})$', val)
+  if m is None:
+    return None
+  return[int(m.group(1)), int(m.group(2)), int(m.group(3))]
 #@ _IS_24HR_TIME_
 
 #@ _IS_AMPM_TIME_
@@ -217,13 +231,13 @@ def is_ampm_time(val):
   m = re.match('^(\d{1,2})\D(\d{2})\D(\d{2})(?:\s*(AM|PM))?$', val, flags = re.I)
   if m is None:
     return None
-  (hour, min, sec) = (m.group(1), m.group(2), m.group(3))
+  (hour, min, sec) = (int(m.group(1)), (m.group(2)), (m.group(3)))
   # supply missing seconds
   sec = '00' if sec is None else sec
-  if int(hour) == 12 and (m.group(4) is None or m.group(4).upper() == "AM"):
+  if hour == 12 and (m.group(4) is None or m.group(4).upper() == "AM"):
     hour = '00' # 12:xx:xx AM times are 00:xx:xx
   elif int(hour) < 12 and (m.group(4) is not None) and m.group(4).upper() == "PM":
-    hour = int(hour) + 12 # PM times other than 12:xx:xx
+    hour = hour + 12 # PM times other than 12:xx:xx
   return [hour, min, sec] # return hour, minute, second
 #@ _IS_AMPM_TIME_
 
@@ -232,7 +246,7 @@ def is_ampm_time(val):
 
 #@ _IS_LEAP_YEAR_
 def is_leap_year(year):
-  pass
+  return ((year % 4 == 0) and ((year % 100 != 0) or (year % 400 == 0) ) )
 #@ _IS_LEAP_YEAR_
 
 
@@ -241,7 +255,12 @@ def is_leap_year(year):
 
 #@ _IS_VALID_DATE_
 def is_valid_date(year, month, day):
-  pass
+  print(year, month, day)
+  if year < 0 or month < 0 or day < 1:
+    return 0
+  if year > 9999 or month > 12 or day > days_in_month(year, month):
+    return 0
+  return 1
 #@ _IS_VALID_DATE_
 
 
@@ -250,7 +269,11 @@ def is_valid_date(year, month, day):
 
 #@ _IS_VALID_TIME_
 def is_valid_time(hour, minute, second):
-  pass
+  if hour < 0 or minute < 0 or second < 0:
+    return 0
+  if hour > 23 or minute > 59 or second > 59:
+    return 0
+  return 1
 #@ _IS_VALID_TIME_
 
 
@@ -260,8 +283,10 @@ def is_valid_time(hour, minute, second):
 # at 70, like MySQL.  (Thus 00..69 -> 2000..2069 and 70..99 -> 1970..1999)
 
 #@ _YY_TO_CCYY_
-def yy_to_ccyy(year, transition_point):
-  pass
+def yy_to_ccyy(year, transition_point = 70):
+  if year < 100:
+    year += 1900 if year >= transition_point else 2000
+  return year
 #@ _YY_TO_CCYY_
 
 
@@ -270,5 +295,10 @@ def yy_to_ccyy(year, transition_point):
 
 #@ _DAYS_IN_MONTH_
 def days_in_month(year, month):
-  pass
+  day_tbl = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+  days = day_tbl[month - 1]
+
+  if month == 2 and is_leap_year(year):
+    days += 1
+  return days
 #@ _DAYS_IN_MONTH_

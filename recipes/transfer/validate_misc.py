@@ -1,8 +1,9 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # validate_misc.py: Miscellaneous validation stuff, mostly pattern-matching.
 
 import cookbook_utils as cu
 
+print("Test: is_iso_date()")
 val = "9-01-01"
 #@ _USE_IS_ISO_DATE_
 ref = cu.is_iso_date(val)
@@ -16,24 +17,68 @@ else:
 print(ref)
 #@ _USE_IS_ISO_DATE_
 
-print "Test: is_valid_date()";
+print("Test: is_mmddyy_date()")
+val = "04-15-2021"
+#@_USE_IS_MMDDYY_DATE_1
+ref = cu.is_mmddyy_date(val)
+print(ref)
+#@_USE_IS_MMDDYY_DATE_1
+val = "15-04-2021"
+#@_USE_IS_MMDDYY_DATE_2
+ref = cu.is_mmddyy_date(val)
+print(ref)
+#@_USE_IS_MMDDYY_DATE_2
+
+print("Test: is_ddmmyy_date()")
+val = "04-15-2021"
+#@_USE_IS_DDMMYY_DATE_1
+ref = cu.is_ddmmyy_date(val)
+print(ref)
+#@_USE_IS_DDMMYY_DATE_1
+val = "15-04-2021"
+#@_USE_IS_DDMMYY_DATE_2
+ref = cu.is_ddmmyy_date(val)
+print(ref)
+#@_USE_IS_DDMMYY_DATE_2
+
+print("Test: is_valid_date()")
 val = "2001-02-03";      # use known valid date here
 ref = cu.is_iso_date(val)
-print(ref)
+#@ _USE_IS_VALID_DATE_
+valid = cu.is_valid_date(ref[0], ref[1], ref[2])
+#@ _USE_IS_VALID_DATE_
+print(val, "is valid:", "yes" if valid else "no")
 
 # More tests
-print "More tests: is_valid_date()";
+print("More tests: is_valid_date()")
 values = ['2100-02-29', '2000-02-29', '2000-13-01', '2000-04-31', '1000']
 for val in values:
   ref = cu.is_iso_date(val)
-  print(ref)
+  if ref:
+    valid = cu.is_valid_date(ref[0], ref[1], ref[2])
+  else:
+    valid = None
+  print(val, "is valid:", "yes" if valid else "no")
 
-print "Test: is_24hr_time(), is_ampm_time()";
+print("Test: is_valid_time()")
+values = ['10:15:30', '10:60:30', '24:15:30', '10:15:60']
+for val in values:
+  ref = cu.is_24hr_time(val)
+  if ref:
+    valid = cu.is_valid_time(ref[0], ref[1], ref[2])
+  else:
+    valid = None
+  print(val, "is valid:", "yes" if valid else "no")
+
+
+print("Test: is_24hr_time(), is_ampm_time()")
 values = ["8:20:15", "8:20:15 AM", "8:20:15 PM", "10:20:15 AM", "10:20:15 PM", "10:20:15 pm"]
 for val in values:
   print("Value: %s" % (val))
+  ref = cu.is_24hr_time(val)
+  print(" is_24hr_time(): ", "yes" if ref else "no")
   ref = cu.is_ampm_time(val)
-  print(ref)
+  print(" is_ampm_time(): ", "yes" if ref else "no")
 
 """
 use strict;
