@@ -10,14 +10,13 @@
 
 import sys
 import re
-import cookbook
-from cookbook_utils import *
+import fileinput
 
 # transition point at which 2-digit XX year values are assumed to be
 # 19XX (below that, they are treated as 20XX)
 transition = 70
 
-for line in sys.stdin:
+for line in fileinput.input(sys.argv[1:]):
   val = line.split("\t", 10000);  # split, preserving all fields
   for i in range(0, len(val)):
     # look for strings in MM-DD-[CC]YY format

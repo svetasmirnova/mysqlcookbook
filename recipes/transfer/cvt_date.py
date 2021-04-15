@@ -18,8 +18,6 @@ import re
 import getopt
 import fileinput
 import warnings
-import cookbook
-from cookbook_utils import *
 
 def check_date_format(format, type):
   if re.match('^iso', format, re.IGNORECASE):
@@ -144,7 +142,7 @@ if warn and not add_century:
 line_num = 0
 for line in fileinput.input(args):
   line_num += 1
-  values = line.rstrip().split("\t", 10000);  # split, preserving all fields
+  values = line.rstrip().split("\t", 10000)  # split, preserving all fields
   for i in range(0, len(values)):
     # don't process the value if a column list was
     # specified but this column isn't one of them
