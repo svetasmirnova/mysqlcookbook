@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # loop.py: Typical input-processing loop.
 
 # Assumes tab-delimited, linefeed-terminated input lines.

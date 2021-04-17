@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # test_integer.py: Exercise the integer-testing library functions.
 
 import cookbook_utils as cu

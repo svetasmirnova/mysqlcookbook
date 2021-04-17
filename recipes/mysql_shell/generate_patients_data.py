@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # generate_patients_data.py: generate data in table patients
 
 #First, import necessary packages

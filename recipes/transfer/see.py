@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # see.py: Print nonprinting chars sensibly.
 
 import sys

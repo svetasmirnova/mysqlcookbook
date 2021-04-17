@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # test_pat.py: Read input lines, see which patterns they match.
 
 import re

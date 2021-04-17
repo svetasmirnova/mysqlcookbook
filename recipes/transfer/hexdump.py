@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # hexdump.py: Dump input in hex format.
 
 # Usage: hexdump.py [ filename ] ...
