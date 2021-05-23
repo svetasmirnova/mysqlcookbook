@@ -10,7 +10,7 @@ CREATE TABLE `poi` (
   `name` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`poi_id`),
   SPATIAL KEY `position` (`position`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 # Load data
 INSERT INTO poi VALUES (1, ST_GeomFromText('POINT(41.0211 29.0041)', 4326), 'Maiden\'s Tower');
