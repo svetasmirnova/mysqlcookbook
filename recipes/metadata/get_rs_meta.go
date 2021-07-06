@@ -3,6 +3,7 @@ package main
 import (
   "fmt"
   "log"
+  "flag"
   "github.com/svetasmirnova/mysqlcookbook/recipes/lib/cookbook"
 )
 
@@ -11,6 +12,11 @@ func main() {
   defer db.Close()
 
   stmt := "SELECT city, t, distance, fuel FROM trip_leg"
+  flag.Parse()
+  values := flag.Args()
+  if len(values) > 0 {
+    stmt = values[0]
+  }
   fmt.Printf("Statement: %s\n", stmt)
 
   rows, err := db.Query(stmt)
@@ -27,6 +33,9 @@ func main() {
 
   ncols := len(cols)
   fmt.Printf("Number of columns: %d\n", ncols)
+  if (ncols == 0) {
+    fmt.Println("Note: statement has no result set")
+  }
 
   for i := 0; i < ncols; i++ {
     fmt.Printf("---- Column %d (%s) ----\n", i, cols[i].Name())
