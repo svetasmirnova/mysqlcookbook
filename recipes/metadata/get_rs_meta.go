@@ -5,11 +5,13 @@ import (
   "log"
   "flag"
   "github.com/svetasmirnova/mysqlcookbook/recipes/lib"
-  //"../lib"
 )
 
 func main() {
-  db := cookbook.Connect()
+  db, err := cookbook.Connect()
+  if err != nil {
+    log.Fatal(err)
+  }
   defer db.Close()
 
   stmt := "SELECT city, t, distance, fuel FROM trip_leg"
