@@ -4,7 +4,8 @@ import (
   "fmt"
   "log"
   "flag"
-  "github.com/svetasmirnova/mysqlcookbook/recipes/lib/cookbook"
+  "github.com/svetasmirnova/mysqlcookbook/recipes/lib"
+  //"../lib"
 )
 
 func main() {
