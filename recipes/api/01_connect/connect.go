@@ -18,5 +18,11 @@ func main() {
         log.Fatal(err)
     }
 
+    err = db.Ping()
+
+    if err != nil {
+        log.Fatal(err)
+    }
+
     fmt.Println("Connected!")
 }
