@@ -25,7 +25,7 @@ func main() {
 	if err == sql.ErrNoRows {
 		fmt.Print("There were no rows, but otherwise no error occurred")
 	} else {
-		log.Fatal(err)
+		fmt.Println(err.Error())
 	}
     }
   fmt.Println(actor)
