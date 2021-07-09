@@ -23,23 +23,17 @@ func main() {
 		log.Fatal(err)
 	}
 
-	res, err := db.Query("SELECT id, name, cats FROM profile where cats = 4")
+	row := db.QueryRow("SELECT id, name, cats FROM profile where id=3")
 
-	defer res.Close()
+    var profile Profile
+    err = row.Scan(&profile.id, &profile.name, &profile.cats)
 
-	if err != nil {
+	if err == sql.ErrNoRows {
+        fmt.Println("No row matched!")
+    } else if err != nil {
 		log.Fatal(err)
-	}
+	} else {
+        fmt.Printf("%v\n", profile)
+    }
 
-	for res.Next() {
-
-		var profile Profile
-		err := res.Scan(&profile.id, &profile.name, &profile.cats)
-
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		fmt.Printf("%v\n", profile)
-	}
 }

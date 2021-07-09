@@ -23,7 +23,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	res, err := db.Query("SELECT id, name, cats FROM profile where cats = 4")
+	res, err := db.Query("SELECT id, name, cats FROM profile")
 
 	defer res.Close()
 
@@ -40,6 +40,6 @@ func main() {
 			log.Fatal(err)
 		}
 
-		fmt.Printf("%v\n", profile)
+		fmt.Printf("%+v\n", profile)
 	}
 }
