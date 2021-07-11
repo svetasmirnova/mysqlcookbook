@@ -4,19 +4,18 @@ package main
 import (
 	"fmt"
 
-	"github.com/mysqlcookbook/db"
+	"github.com/svetasmirnova/mysqlcookbook/recipes/lib"
 )
 
 func main() {
 
-	fmt.Println("Calling db.MyCnf()") 
-        var dsn string
+	fmt.Println("Calling db.MyCnf()")
+    var dsn string
 
-        dsn, err := db.MyCnf("client")
-        if err != nil {
-	fmt.Printf("error: %v\n", err)
-        } else {
-	fmt.Printf("DSN is: %s\n", dsn)
-        }
-       
+    dsn, err := cookbook.MyCnf("client")
+    if err != nil {
+	  fmt.Printf("error: %v\n", err)
+    } else {
+	  fmt.Printf("DSN is: %s\n", dsn)
+    }
 }
