@@ -1,4 +1,4 @@
-// null-in-result.pl.go : Selecting NULL values in Golang
+// null-in-result.go : Selecting NULL values in Golang
 package main
 
 import (
