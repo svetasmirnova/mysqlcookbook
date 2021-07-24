@@ -12,11 +12,13 @@ package main
 
 import (
   "log"
+  "fmt"
+  "flag"
   "database/sql"
   "github.com/svetasmirnova/mysqlcookbook/recipes/lib"
 )
 
-func initTable(db *sql.DB, tblEngine string) (bool, error) {
+func initTable(db *sql.DB, tblEngine string) (error) {
   var queries [4]string
   var err error = nil
   queries[0] = "DROP TABLE IF EXISTS money"
@@ -27,11 +29,62 @@ func initTable(db *sql.DB, tblEngine string) (bool, error) {
   for _, query := range queries {
     _, err = db.Exec(query)
     if err != nil {
-      return false, err
+      fmt.Println("Cannot initialize test table")
+      fmt.Printf("Error: %s\n", err.Error())
+      return err
     }
   }
 
-  return true, nil
+  return nil
+}
+
+func displayTable(db *sql.DB) (error) {
+  rows, err := db.Query("SELECT name, amt FROM money")
+  if err != nil {
+    return err
+  }
+  defer rows.Close()
+
+  for rows.Next() {
+    var (
+      name string
+      amt  int32
+    )
+    if err := rows.Scan(&name, &amt); err != nil {
+      fmt.Println("Cannot display contents of test table")
+      fmt.Printf("Error: %s\n", err.Error())
+      return err
+    }
+
+    fmt.Printf("%s has $%d\n", name, amt)
+  }
+
+  return nil
+}
+
+func runTransaction(db *sql.DB, queries []string) (error) {
+  tx, err := db.Begin()
+  if err != nil {
+    return err
+  }
+
+  for _, query := range queries {
+    _, err := tx.Exec(query)
+    if err != nil {
+      fmt.Printf("Transaction failed, rolling back.\nError was: %s\n",
+                 err.Error())
+      if txerr := tx.Rollback(); err != nil {
+        return txerr
+      }
+      return err
+    }
+  }
+
+  if err := tx.Commit(); err != nil {
+    return err
+  }
+
+  return nil
 }
 
 func main() {
@@ -41,8 +94,59 @@ func main() {
   }
   defer db.Close()
 
-  res, err := initTable(db, "InnoDB")
-  if !res {
+  var tblEngine string = "InnoDB"
+  flag.Parse()
+  values := flag.Args()
+  if len(values) > 0 {
+    tblEngine = values[0]
+  }
+  fmt.Printf("Using storage engine %s to test transactions\n", tblEngine)
+
+  fmt.Println("----------")
+  fmt.Println("This transaction should succeed.")
+  fmt.Println("Table contents before transaction:")
+
+  if err := initTable(db, tblEngine); err != nil {
+    log.Fatal(err)
+  }
+
+  if err = displayTable(db); err != nil {
+    log.Fatal(err)
+  }
+
+  var trx = []string{
+    "UPDATE money SET amt = amt - 6 WHERE name = 'Eve'",
+    "UPDATE money SET amt = amt + 6 WHERE name = 'Ida'",
+  }
+
+  runTransaction(db, trx)
+
+  fmt.Println("Table contents after transaction:")
+  if err = displayTable(db); err != nil {
+    log.Fatal(err)
+  }
+
+  fmt.Println("----------")
+  fmt.Println("This transaction should fail.")
+  fmt.Println("Table contents before transaction:")
+
+  if err := initTable(db, tblEngine); err != nil {
+    log.Fatal(err)
+  }
+
+  if err = displayTable(db); err != nil {
+    log.Fatal(err)
+  }
+
+  trx = []string{
+    "UPDATE money SET amt = amt - 6 WHERE name = 'Eve'",
+    "UPDATE money SET xamt = amt + 6 WHERE name = 'Ida'",
+  }
+
+  runTransaction(db, trx);
+
+  fmt.Println("Table contents after transaction:")
+  if err = displayTable(db); err != nil {
     log.Fatal(err)
   }
 }
