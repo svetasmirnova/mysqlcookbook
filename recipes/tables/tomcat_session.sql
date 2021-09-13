@@ -13,5 +13,5 @@ CREATE TABLE tomcat_session
   update_time   BIGINT NOT NULL,
   PRIMARY KEY (id),
   INDEX (app)
-);
+) CHARACTER SET latin1;
 #@ _CREATE_SESSION_TABLE_

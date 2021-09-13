@@ -82,6 +82,6 @@ SELECT t1.id, t1.date,
   SUM(t2.h) AS h
 FROM player_stats2 AS t1, player_stats2 AS t2
 WHERE t1.id >= t2.id
-GROUP BY t1.date
+GROUP BY t1.id, t1.date
 ;
 

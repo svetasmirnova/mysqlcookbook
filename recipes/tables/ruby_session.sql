@@ -8,7 +8,7 @@ CREATE TABLE ruby_session
   session_value LONGBLOB NOT NULL,
   update_time   DATETIME NOT NULL,
   PRIMARY KEY (session_id)
-);
+) CHARACTER SET latin1;
 #@ _CREATE_TABLE_
 
 # index the update_time column

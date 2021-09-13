@@ -24,4 +24,4 @@ SUM(t2.precip) / (TO_DAYS(MAX(t2.date)) - TO_DAYS(MIN(t2.date)) + 1)
 AS 'avg. precip'
 FROM rainfall AS t1, rainfall AS t2
 WHERE t1.date >= t2.date
-GROUP BY t1.date;
+GROUP BY t1.date, t1.precip;

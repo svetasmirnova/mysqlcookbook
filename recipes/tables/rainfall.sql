@@ -34,7 +34,7 @@ SELECT t1.date, t1.precip AS 'daily precip',
 SUM(t2.precip) AS 'cum. precip'
 FROM rainfall AS t1, rainfall AS t2
 WHERE t1.date >= t2.date
-GROUP BY t1.date;
+GROUP BY t1.date, t1.precip;
 
 # Add columns to show elapsed days and running average of amount of
 # precipitation, assuming no missing days
@@ -45,4 +45,4 @@ COUNT(t2.precip) AS days,
 AVG(t2.precip) AS 'avg. precip'
 FROM rainfall AS t1, rainfall AS t2
 WHERE t1.date >= t2.date
-GROUP BY t1.date;
+GROUP BY t1.date, t1.precip;

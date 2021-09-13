@@ -17,5 +17,5 @@ SELECT * FROM al_winner;
 
 SET @n = 0;
 SET @val = 0;
-SELECT @n:=IF(@val=wins,@n,@n+1) AS rank, name, @val:=wins AS wins
+SELECT @n:=IF(@val=wins,@n,@n+1) AS al_ank, name, @val:=wins AS wins
 FROM al_winner ORDER BY wins DESC, name;
