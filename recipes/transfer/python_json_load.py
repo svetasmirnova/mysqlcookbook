@@ -20,7 +20,7 @@ db = mysql.connector.connect(host='localhost',
                              password='cbpass',auth_plugin='mysql_native_password')
 
 cur = db.cursor(prepared=True)
-sql = "INSERT INTO reviews VALUES (0,%s)"
+sql = "INSERT INTO reviews(id, appliences_review) VALUES (0,%s)"
 
 with open(filepath) as file:
     line = file.readline()
