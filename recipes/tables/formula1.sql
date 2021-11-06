@@ -17,7 +17,7 @@ CREATE TABLE `formula1` (
 # Load data by inserting all positions
 
 INSERT INTO formula1 VALUES(0,1,77,"Valtteri Bottas","MERCEDES",58,"2021-10-08 1:31:04.103",26);
-INSERT INTO formula1 VALUES(0,2,33,"Max Verstappen","RED BULL RACING HONDA",58,"2021-10-08 1:45:58.103",18);
+INSERT INTO formula1 VALUES(0,2,33,"Max Verstappen","RED BULL RACING HONDA",58,"2021-10-08 1:45:58.243",18);
 INSERT INTO formula1 VALUES(0,3,11,"Sergio Perez","RED BULL RACING HONDA",58,"2021-10-08 1:46:10.342",15);
 
 
@@ -27,7 +27,7 @@ SELECT MIN(time) from formula1 into @fastest;
 # Select the race standings
 WITH time_gap AS (
   SELECT
-    position,
+    position as pos,
     car,
     driver,
     time,
@@ -37,7 +37,7 @@ WITH time_gap AS (
  
 differences AS (
   SELECT
-    position,
+    pos,
     driver,
     car,
     time,
@@ -48,12 +48,23 @@ differences AS (
 )
  
 SELECT
-  position,
+  pos,
   driver,
   car,
   time,
   CONCAT(
-    FLOOR(minutes_part / 60), ' minutes ',
-    seconds_part, ' seconds'
+    FLOOR(minutes_part / 60), 'm',
+    seconds_part, 's'
   ) AS difference
 FROM differences;
+
+# Formatted select
+
+select position as pos,
+        no,
+        driver,
+        car,
+        laps,
+        date_format(time,'%H:%i:%s:%f') as time,
+         points as pts
+   from formula1;
