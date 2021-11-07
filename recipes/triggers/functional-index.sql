@@ -28,16 +28,16 @@ INSERT INTO expdata (value) VALUES (.01),(.1),(1),(10),(100);
 SELECT *, LOG10(value) FROM expdata;
 SELECT * FROM expdata WHERE LOG10(value) BETWEEN 0 AND 2;
 # Try EXPLAIN with and without an indexed functional column
-#EXPLAIN EXTENDED SELECT * FROM expdata WHERE LOG10(value) BETWEEN 0 AND 2\G
-EXPLAIN EXTENDED SELECT * FROM expdata WHERE LOG10(value) < 1\G
+#EXPLAIN SELECT * FROM expdata WHERE LOG10(value) BETWEEN 0 AND 2\G
+EXPLAIN SELECT * FROM expdata WHERE LOG10(value) < 1\G
 SHOW WARNINGS\G
 #ALTER TABLE expdata ADD COLUMN log10_value FLOAT, ADD INDEX (log10_value);
 #SHOW CREATE TABLE t\G
 UPDATE expdata SET log10_value = LOG10(value);
 SELECT * FROM expdata;
 SELECT * FROM expdata WHERE log10_value BETWEEN 0 AND 2;
-#EXPLAIN EXTENDED SELECT * FROM expdata WHERE log10_value BETWEEN 0 AND 2\G
-EXPLAIN EXTENDED SELECT * FROM expdata WHERE log10_value < 1\G
+#EXPLAIN SELECT * FROM expdata WHERE log10_value BETWEEN 0 AND 2\G
+EXPLAIN SELECT * FROM expdata WHERE log10_value < 1\G
 SHOW WARNINGS\G
 
 # Set up a BEFORE INSERT trigger that calculates the LOG10() value
