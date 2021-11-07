@@ -50,7 +50,6 @@ differences AS (
 SELECT
   pos,
   driver,
-  car,
   time,
   CONCAT(
     FLOOR(minutes_part / 60), 'm',
