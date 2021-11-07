@@ -16,7 +16,7 @@ SELECT
   SUBSTRING_INDEX(name,'.',-1)
 #@ _SEG_3_
   AS rightmost
-FROM hostnames;
+FROM hostname;
 
 SELECT
   name,
@@ -26,7 +26,7 @@ SELECT
   AS middle,
   SUBSTRING_INDEX(CONCAT('..',name),'.',-1)
   AS rightmost
-FROM hostnames
+FROM hostname
 ORDER BY
   SUBSTRING_INDEX(CONCAT('..',name),'.',-1),
   SUBSTRING_INDEX(SUBSTRING_INDEX(CONCAT('..',name),'.',-2),'.',1),

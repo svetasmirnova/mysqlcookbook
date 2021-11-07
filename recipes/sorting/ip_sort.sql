@@ -7,7 +7,7 @@
 
 # lexical sort
 
-SELECT ip FROM hostips ORDER BY ip;
+SELECT ip FROM hostip ORDER BY ip;
 
 # numeric sort: extract each segment, convert to number, sort left to right
 
@@ -29,7 +29,7 @@ SELECT
   SUBSTRING_INDEX(ip,'.',-1)
 #@ _SEG_4_
   AS seg4
-FROM hostips
+FROM hostip
 ORDER BY
   SUBSTRING_INDEX(SUBSTRING_INDEX(ip,'.',-4),'.',1)+0,
   SUBSTRING_INDEX(SUBSTRING_INDEX(ip,'.',-3),'.',1)+0,

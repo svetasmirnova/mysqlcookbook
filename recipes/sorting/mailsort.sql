@@ -12,9 +12,12 @@ ORDER BY DAYNAME(t)
 
 # Sort by day-of-week order (Sunday first, Saturday last)
 
-SELECT DISTINCT DAYNAME(t)
-FROM mail
-ORDER BY DAYOFWEEK(t)
+SELECT DISTINCT DAYNAME FROM
+(
+  SELECT DAYNAME(t) DAYNAME
+  FROM mail
+  ORDER BY DAYOFWEEK(t)
+) tmp
 ;
 
 # using an alias ...
@@ -27,9 +30,13 @@ ORDER BY daynum
 # Like previous, but with Monday first, Sunday last.  Uses a MOD
 # trick to map 2..7,1 to 1..7
 
-SELECT DISTINCT DAYNAME(t)
-FROM mail
-ORDER BY (DAYOFWEEK(t) + 5) % 7
+SELECT DAYNAME FROM
+(
+  SELECT DAYNAME(t) DAYNAME, AVG((DAYOFWEEK(t) + 5) % 7) wd
+  FROM mail
+  GROUP BY DAYNAME
+) tmp
+ORDER BY wd
 ;
 
 # Order by size, display size as strings of the form nnnKB
