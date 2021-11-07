@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # driver_trips.py: summarize miles per driver and show a list for each
 # driver of the trips they took.
 
@@ -64,7 +64,7 @@ try:
   # we need mutable values that can be modified in the loop)
   name_map = {}
   for (name, trav_date, miles) in rows:
-    if not name_map.has_key(name): # initialize entry if nonexistent
+    if name not in name_map: # initialize entry if nonexistent
       name_map[name] = [0, 0]
     name_map[name][0] += 1     # count days
     name_map[name][1] += miles # sum miles
