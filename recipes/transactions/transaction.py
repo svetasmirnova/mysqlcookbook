@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # transaction.py: simple transaction demonstration
 
 # By default, this creates an InnoDB table.  If you specify a storage
