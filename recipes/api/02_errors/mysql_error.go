@@ -29,4 +29,14 @@ func main() {
 		}
 	}
 	fmt.Println(actor)
+
+	err = db.QueryRow("SELECT actors FROM actors where actor='Dwayne Jhonson'").Scan(&actor)
+	if err != nil {
+		if err == sql.ErrNoRows {
+			fmt.Print("There were no rows, but otherwise no error occurred")
+		} else {
+			fmt.Println(err.Error())
+		}
+	}
+	fmt.Println(actor)
 }

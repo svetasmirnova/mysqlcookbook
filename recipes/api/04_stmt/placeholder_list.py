@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # placeholder_list.py
 
 # Create a string of placeholder characters, with one ? character

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # placeholder.py: demonstrate statement processing in Python
 # (with placeholders)
 

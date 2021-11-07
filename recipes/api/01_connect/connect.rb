@@ -7,8 +7,9 @@ begin
   dsn = "DBI:Mysql:host=localhost;database=cookbook"
   dbh = DBI.connect(dsn, "cbuser", "cbpass")
   puts "Connected"
-rescue
+rescue => e
   puts "Cannot connect to server"
+puts e.backtrace
   exit(1)
 end
 dbh.disconnect

@@ -25,19 +25,19 @@ func (p *Profile) String() string {
 func main() {
 
 	db, err := sql.Open("mysql", "cbuser:cbpass@tcp(127.0.0.1:3306)/cookbook?parseTime=true")
-	defer db.Close()
 
 	if err != nil {
 		log.Fatal(err)
 	}
+	defer db.Close()
 
 	sql := "SELECT name, birth as birthday from profile WHERE id = 9"
 	res, err := db.Query(sql)
-	defer res.Close()
 
 	if err != nil {
 		log.Fatal(err)
 	}
+	defer res.Close()
 
 	for res.Next() {
 		var profile Profile

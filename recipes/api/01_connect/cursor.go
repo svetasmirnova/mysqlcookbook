@@ -9,6 +9,7 @@ func main() {
   if err != nil {
     panic(err.Error())
   }
+  defer db.Close()
 
   update, err := db.Exec("UPDATE profile SET cats = cats+1 WHERE name = 'Sybil'")
   if err != nil {
@@ -25,5 +26,4 @@ func main() {
 
     log.Printf("Rows affected %d\n", rows)
 
-  defer db.Close()
 }

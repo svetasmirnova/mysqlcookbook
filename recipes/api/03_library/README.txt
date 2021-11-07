@@ -44,3 +44,8 @@ Python:
 Ruby:
   Cookbook.rb: module file
   harness.rb: script that uses the module
+
+Go:
+  Cookbook.go: module file
+  harness.go: script that uses the module
+

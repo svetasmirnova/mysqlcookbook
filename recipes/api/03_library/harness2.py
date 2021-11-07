@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # harness2.py: test harness for cookbook.py library
 
 # Does not catch exceptions, so this script simply dies if

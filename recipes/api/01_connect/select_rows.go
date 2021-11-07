@@ -15,20 +15,20 @@ type Profile struct {
 
 func main() {
 
-    db, err := sql.Open("mysql", "cbuser:Cbuser2021!@tcp(127.0.0.1:3306)/cookbook")
-    defer db.Close()
+    db, err := sql.Open("mysql", "cbuser:cbpass@tcp(127.0.0.1:3306)/cookbook")
 
     if err != nil {
         log.Fatal(err)
     }
+    defer db.Close()
 
     sql := "SELECT id,name FROM profile"
     res, err := db.Query(sql)
-    defer res.Close()
 
     if err != nil {
         log.Fatal(err)
     }
+    defer res.Close()
 
     for res.Next() {
             var profile Profile

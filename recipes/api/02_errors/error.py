@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # error.py: demonstrate MySQL error handling
 
 import mysql.connector

@@ -16,6 +16,9 @@ Python:
 Ruby:
   connect.rb
 
+Go:
+  connect.go
+
 The "connect2" and "connect3" scripts in this directory show
 alternative methods for connecting to the server, generally by
 specifying a TCP/IP port number or Unix domain socket file value

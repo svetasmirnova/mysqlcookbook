@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # connect.py: connect to the MySQL server
 
 import mysql.connector

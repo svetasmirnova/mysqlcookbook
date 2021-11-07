@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # connect4.py: connect to the MySQL server specifying character set
 
 import mysql.connector

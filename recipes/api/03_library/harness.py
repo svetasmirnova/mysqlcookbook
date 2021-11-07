@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # harness.py: test harness for cookbook.py library
 
 import mysql.connector

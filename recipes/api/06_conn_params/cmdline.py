@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # cmdline.py: demonstrate command-line option parsing in Python
 
 import sys

@@ -51,6 +51,9 @@ func insert(db *sql.DB, p profile) error {
 func main() {
 
 	db, err := sql.Open("mysql", "cbuser:cbpass@tcp(127.0.0.1:3306)/cookbook")
+    if err != nil {
+        log.Fatal(err)
+    }
 	defer db.Close()
 
 	p := profile{

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # stmt.py: demonstrate statement processing in Python
 # (without placeholders)
 

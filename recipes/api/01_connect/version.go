@@ -10,19 +10,19 @@ import (
 
 func main() {
 
-    db, err := sql.Open("mysql", "root:Alkin2020!@tcp(127.0.0.1:3306)/cookbook")
-    defer db.Close()
+    db, err := sql.Open("mysql", "cbuser:cbpass@tcp(127.0.0.1:3306)/cookbook")
 
     if err != nil {
         log.Fatal(err)
     }
+    defer db.Close()
 
     var version string
 
-    err2 := db.QueryRow("SELECT VERSION()").Scan(&version)
+    err = db.QueryRow("SELECT VERSION()").Scan(&version)
 
-    if err2 != nil {
-        log.Fatal(err2)
+    if err != nil {
+        log.Fatal(err)
     }
 
     fmt.Println(version)

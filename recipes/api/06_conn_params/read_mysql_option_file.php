@@ -60,12 +60,18 @@ function read_mysql_option_file ($filename, $group_list = "client")
 # 2) Read system-wide option file, print server parameters listed there
 
 #@ _EXAMPLES_
-$opt = read_mysql_option_file ("/home/paul/.my.cnf");
+$opt = read_mysql_option_file ("~/.my.cnf");
 $dsn = "mysql:dbname=cookbook";
 if (isset ($opt["host"]))
   $dsn .= ";host=" . $opt["host"];
-$user = $opt["user"];
-$password = $opt["password"];
+if (isset ($opt["user"]))
+  $user = $opt["user"];
+else
+  $user = NULL;
+if (isset ($opt["passwod"]))
+  $password = $opt["password"];
+else
+  $password = NULL;
 try
 {
   $dbh = new PDO ($dsn, $user, $password);

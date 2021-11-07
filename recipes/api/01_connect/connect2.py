@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # connect2.py: show other ways to connect to the MySQL server
 
 # * Use a dictionary to specify connection arguments
