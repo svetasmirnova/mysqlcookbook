@@ -7,7 +7,6 @@ import (
 
 func main() {
   db, err := cookbook.Connect()
-  defer db.Close()
 
   if err != nil {
     fmt.Println("Cannot connect to server")
@@ -15,4 +14,5 @@ func main() {
   } else {
     fmt.Println("Connected")
   }
+  defer db.Close()
 }

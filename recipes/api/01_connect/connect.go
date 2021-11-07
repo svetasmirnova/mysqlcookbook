@@ -12,11 +12,11 @@ import (
 func main() {
 
     db, err := sql.Open("mysql", "cbuser:cbpass@tcp(127.0.0.1:3306)/cookbook")
-    defer db.Close()
 
     if err != nil {
         log.Fatal(err)
     }
+    defer db.Close()
 
     err = db.Ping()
 

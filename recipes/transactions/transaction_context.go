@@ -20,15 +20,15 @@ import (
 )
 
 func initTable(ctx context.Context, db *sql.DB, tblEngine string) (error) {
-  var queries [4]string
-  var err error = nil
-  queries[0] = "DROP TABLE IF EXISTS money"
-  queries[1] = "CREATE TABLE money (name CHAR(5), amt INT) ENGINE = " + tblEngine
-  queries[2] = "INSERT INTO money (name, amt) VALUES('Eve', 10)"
-  queries[3] = "INSERT INTO money (name, amt) VALUES('Ida', 0)"
+  queries := [4]string {
+    "DROP TABLE IF EXISTS money",
+    "CREATE TABLE money (name CHAR(5), amt INT) ENGINE = " + tblEngine,
+    "INSERT INTO money (name, amt) VALUES('Eve', 10)",
+    "INSERT INTO money (name, amt) VALUES('Ida', 0)",
+  }
 
   for _, query := range queries {
-    _, err = db.ExecContext(ctx, query)
+    _, err := db.ExecContext(ctx, query)
     if err != nil {
       fmt.Println("Cannot initialize test table")
       fmt.Printf("Error: %s\n", err.Error())
@@ -123,7 +123,9 @@ func main() {
     "UPDATE money SET amt = amt + 6 WHERE name = 'Ida'",
   }
 
-  runTransaction(ctx, db, trx)
+  if err = runTransaction(ctx, db, trx); err != nil {
+    log.Fatal(err)
+  }
 
   fmt.Println("Table contents after transaction:")
   if err = displayTable(ctx, db); err != nil {
@@ -147,7 +149,9 @@ func main() {
     "UPDATE money SET xamt = amt + 6 WHERE name = 'Ida'",
   }
 
-  runTransaction(ctx, db, trx);
+  if err = runTransaction(ctx, db, trx); err != nil {
+    log.Fatal(err)
+  }
 
   fmt.Println("Table contents after transaction:")
   if err = displayTable(ctx, db); err != nil {
