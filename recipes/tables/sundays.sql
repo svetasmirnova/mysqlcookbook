@@ -2,12 +2,14 @@
 
 # Table to demonstrate finding number of Sundays in a month. 
 
-DROP TABLE `sundays`;
+DROP TABLE IF EXISTS `sundays`;
+#@ _CREATE_TABLE_
 CREATE TABLE `sundays` (
     year YEAR(4), 
     month INT(2) UNSIGNED ZEROFILL,
     day INT(2) UNSIGNED ZEROFILL
 );
+#@ _CREATE_TABLE_
 
 # Load data by inserting all Sundays in November 2021
 

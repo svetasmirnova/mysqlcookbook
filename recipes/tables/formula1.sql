@@ -2,7 +2,8 @@
 
 # Table to demonstrate finding number of Sundays in a month. 
 
-DROP TABLE `formula1`;
+DROP TABLE IF EXISTS `formula1`;
+#@ _CREATE_TABLE_
 CREATE TABLE `formula1` (
     id INT AUTO_INCREMENT PRIMARY KEY,
     position INT(2) UNSIGNED,
@@ -13,6 +14,7 @@ CREATE TABLE `formula1` (
     time     TIMESTAMP(3),
     points   SMALLINT
 );
+#@ _CREATE_TABLE_
 
 # Load data by inserting all positions
 
