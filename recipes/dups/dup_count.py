@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # dup_count.py: generate query to identify and count duplicate values
 
 import sys
