@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # uniq_name.py: show how to use PID to create table name
 
 #@ _GENERATE_NAME_WITH_PID_1_
