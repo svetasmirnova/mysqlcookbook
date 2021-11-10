@@ -1,10 +1,14 @@
 
 # amazon.sql
 
+# To find out what those products those had “excellent” keyword in reviews
+
 SELECT JSON_EXTRACT(appliences_review, "$.reviewerID") as ReviwerID,
 JSON_EXTRACT(appliences_review, "$.asin") as ProductID,
 JSON_EXTRACT(appliences_review, "$.overall") as Rating
 from reviews WHERE MATCH(reviews_virtual) AGAINST('excellent') \G
+
+# Occurances of "good" keyword 
 
 SELECT count(*) from reviews
 WHERE MATCH(reviews_virtual) AGAINST('good');
@@ -16,6 +20,8 @@ AND reviews_virtual_vote > 5;
 SELECT COUNT(*) from reviews
 WHERE MATCH(reviews_virtual) AGAINST('good')
 AND reviews_virtual_overall = 5;
+
+# Additional search counts for different words
 
 SELECT COUNT(*) from reviews
 WHERE MATCH(reviews_virtual) AGAINST('good')
@@ -33,6 +39,8 @@ WHERE MATCH(reviews_text) AGAINST('excellent product for home');
 SELECT count(*) from reviews WHERE MATCH(reviews_virtual) AGAINST('amazing');
 
 SELECT count(*) from reviews WHERE MATCH(reviews_virtual) AGAINST('ok');
+
+# Count samples continued
 
 SELECT COUNT(*) AS Total_Reviews,
 COUNT(IF(reviews_virtual LIKE '%good%',1,NULL)) AS Good_Reviews,
