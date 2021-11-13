@@ -5,7 +5,7 @@ CREATE TABLE multicolseq
 (
   c CHAR(10) NOT NULL,
   i INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (c,i)
+  PRIMARY KEY (i,c)
 )
 ;
 

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # add_insect.py: demonstrate client-side insert_id() cursor method
 # for getting the most recent AUTO_INCREMENT value.
 

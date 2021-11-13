@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # rand_test.pl: create a frequency distribution of RAND() values.
 # This provides a test of the randomness of RAND().
 

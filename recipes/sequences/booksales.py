@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # booksales.py: show how to use LAST_INSERT_ID(expr)
 
 import mysql.connector

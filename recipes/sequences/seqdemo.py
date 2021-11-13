@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # seqdiag.py: test AUTO_INCREMENT operations
 
 import mysql.connector

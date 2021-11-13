@@ -9,6 +9,10 @@
 $npicks = 1000;   # number of times to pick a number
 $bucket = array (); # buckets for counting picks in each interval
 
+# Initialize $bucker array
+for ($i = 0; $i < 10; $i++)
+  $bucket[$i] = 0;
+
 require_once "Cookbook.php";
 
 $dbh = Cookbook::connect ();

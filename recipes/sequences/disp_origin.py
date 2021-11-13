@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # disp_origin.py: display list of distinct origin values from the insect
 # table, numbering the output rows.
 
