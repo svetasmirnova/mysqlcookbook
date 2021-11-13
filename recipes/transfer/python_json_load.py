@@ -1,4 +1,4 @@
-#!env python
+#!/usr/bin/python3
 # Pre-requisites 
 # 1. $ sudo pip install mysql-connector-python
 # 2. $ curl -L -s http://deepyeti.ucsd.edu/jianmo/amazon/categoryFilesSmall/Appliances_5.json.gz | gunzip > /tmp/Appliances_5.json
