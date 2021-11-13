@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # get_server_version.py: get server version string and number from server
 
 # This script demonstrates how to get the string by issuing a

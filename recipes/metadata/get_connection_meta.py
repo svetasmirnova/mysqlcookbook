@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # get_connection_meta.py: get connection metadata
 
 import sys

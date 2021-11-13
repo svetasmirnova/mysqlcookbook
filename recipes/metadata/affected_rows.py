@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # affected_rows.py
 
 import sys

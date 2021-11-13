@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # get_column_names.py: wrapper to demonstrate get_column_names()
 # utility routine
 

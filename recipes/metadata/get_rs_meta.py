@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # get_rs_meta.py: run a statement and display its result set metadata
 
 # The program runs a default statement, which can be overridden by supplying

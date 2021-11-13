@@ -22,7 +22,7 @@ public class EnumOrSetInfo
   String type;
   String defVal;
   boolean nullable;
-  List values;
+  List<String> values;
 
   /* constructor to set up column information */
 
@@ -68,7 +68,7 @@ public class EnumOrSetInfo
     type = m.group (1);  // reset to initial type word
 
     // split value list on commas, trim quotes from end of each word
-    values = new ArrayList ();
+    values = new ArrayList<String> ();
     String[] v = m.group (2).split (",");
     for (int i = 0; i < v.length; i++)
       values.add (v[i].substring (1, v[i].length() - 1));

@@ -22,12 +22,12 @@ public class DBMeta
       ResultSet rs;
 
       System.out.println ("Tables:");
-      rs = md.getTables ("", "", "%", null);
+      rs = md.getTables (conn.getSchema(), "", "%", null);
       while (rs.next ())
         System.out.println (rs.getString (3));
 
       System.out.println ("Columns in profile table and their types:");
-      rs = md.getColumns ("", "", "profile", "%");
+      rs = md.getColumns (conn.getSchema(), "", "profile", "%");
       while (rs.next ())
         System.out.println (rs.getString (4) + ": " + rs.getString (6));
     }

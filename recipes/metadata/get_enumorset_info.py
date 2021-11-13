@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # get_enumorset_info.py: wrapper to demonstrate get_enumorset_info()
 # utility routine.
 
