@@ -5,11 +5,11 @@ require "Cookbook"
 require "Cookbook_Utils" # location of quote_identifier()
 
 begin
-  dbh = Cookbook.connect
-rescue DBI::DatabaseError => e
+  client = Cookbook.connect
+rescue Mysql2::Error => e
   puts "Cannot connect to server"
-  puts "Error code: #{e.err}"
-  puts "Error message: #{e.errstr}"
+  puts "Error code: #{e.errno}"
+  puts "Error message: #{e.message}"
   exit(1)
 end
 
@@ -34,13 +34,13 @@ db_name = "cookbook"
 tbl_name = "profile"
 
 #@ _IDENT_AS_DATA_
-names = dbh.select_all("SELECT COLUMN_NAME
+sth = client.prepare("SELECT COLUMN_NAME
                         FROM INFORMATION_SCHEMA.COLUMNS
-                        WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ?",
-                       db_name, tbl_name)
+                        WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ?")
+names = sth.execute(db_name, tbl_name)
 #@ _IDENT_AS_DATA_
 names.each do |name|
    puts name
 end
 
-dbh.disconnect
+client.close

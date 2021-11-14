@@ -7,8 +7,8 @@
 require "Cookbook"
 
 #@ _FRAG_
-dbh = Cookbook.connect
+client = Cookbook.connect
 print "Connected\n"
-dbh.disconnect
+client.close
 print "Disconnected\n"
 #@ _FRAG_

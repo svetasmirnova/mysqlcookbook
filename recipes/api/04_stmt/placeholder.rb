@@ -5,28 +5,32 @@
 require "Cookbook"
 
 begin
-  dbh = Cookbook.connect
-rescue DBI::DatabaseError => e
+  client = Cookbook.connect
+rescue Mysql2::Error => e
   puts "Cannot connect to server"
-  puts "Error code: #{e.err}"
-  puts "Error message: #{e.errstr}"
+  puts "Error code: #{e.errno}"
+  puts "Error message: #{e.message}"
   exit(1)
 end
 
-# Pass data values directly to do()
+# Pass data values directly to query()
 
-puts "Execute INSERT statement with do()"
+puts "Execute INSERT statement"
 begin
-#@ _PLACEHOLDER_DO_
-  count = dbh.do("INSERT INTO profile (name,birth,color,foods,cats)
-                  VALUES(?,?,?,?,?)",
-                 "De'Mont", "1973-01-12", nil, "eggroll", 4)
-#@ _PLACEHOLDER_DO_
-  puts "Number of rows inserted: #{count}"
-rescue DBI::DatabaseError => e
+#@ _PLACEHOLDER_QUERY_
+  name = "De'Mont"
+  birth = "1973-01-12"
+  color = nil
+  foods = "eggroll"
+  cats = 4
+  client.query("INSERT INTO profile (name,birth,color,foods,cats)
+                  VALUES(#{name},#{birth},#{color},#{foods},#{cats})")
+#@ _PLACEHOLDER_QUERY_
+  puts "Number of rows inserted: #{client.affected_rows}"
+rescue Mysql2::Error => e
   puts "Oops, the statement failed"
-  puts "Error code: #{e.err}"
-  puts "Error message: #{e.errstr}"
+  puts "Error code: #{e.errno}"
+  puts "Error message: #{e.message}"
 end
 
 # Prepare a statement, then pass the statement and data values to execute()
@@ -34,51 +38,52 @@ end
 puts "Execute INSERT statement with prepare() + execute()"
 begin
 #@ _PLACEHOLDER_PREPARE_EXECUTE_1_
-  sth = dbh.prepare("INSERT INTO profile (name,birth,color,foods,cats)
+  sth = client.prepare("INSERT INTO profile (name,birth,color,foods,cats)
                      VALUES(?,?,?,?,?)")
-  count = sth.execute("De'Mont", "1973-01-12", nil, "eggroll", 4)
+  sth.execute("De'Mont", "1973-01-12", nil, "eggroll", 4)
 #@ _PLACEHOLDER_PREPARE_EXECUTE_1_
-  puts "Number of rows inserted: #{count}"
-rescue DBI::DatabaseError => e
+  puts "Number of rows inserted: #{client.affected_rows}"
+rescue Mysql2::Error => e
   puts "Oops, the statement failed"
-  puts "Error code: #{e.err}"
-  puts "Error message: #{e.errstr}"
+  puts "Error code: #{e.errno}"
+  puts "Error message: #{e.message}"
 end
 
 puts "Execute SELECT statement with placeholder"
 begin
 #@ _PLACEHOLDER_PREPARE_EXECUTE_2_
-  sth = dbh.execute("SELECT * FROM profile WHERE cats > ?", 2)
-  sth.fetch do |row|
+  sth = client.prepare("SELECT * FROM profile WHERE cats > ?")
+  result = sth.execute(2)
+  result.each do |row|
     printf "id: %s, name: %s, cats: %s\n", row["id"], row["name"], row["cats"]
   end
-  sth.finish
+  sth.close
 #@ _PLACEHOLDER_PREPARE_EXECUTE_2_
-rescue DBI::DatabaseError => e
+rescue Mysql2::Error => e
   puts "Oops, the statement failed"
-  puts "Error code: #{e.err}"
-  puts "Error message: #{e.errstr}"
+  puts "Error code: #{e.errno}"
+  puts "Error message: #{e.message}"
 end
 
-puts "Construct INSERT statement using quote()"
+puts "Construct INSERT statement using escape()"
 begin
 #@ _QUOTE_
   stmt = sprintf "INSERT INTO profile (name,birth,color,foods,cats)
-                  VALUES(%s,%s,%s,%s,%s)",
-                 dbh.quote("De'Mont"),
-                 dbh.quote("1973-01-12"),
-                 dbh.quote(nil),
-                 dbh.quote("eggroll"),
-                 dbh.quote(4)
-  count = dbh.do(stmt)
+                  VALUES('%s','%s',%s,'%s',%s)",
+                 client.escape("De'Mont"),
+                 client.escape("1973-01-12"),
+                 client.escape("NULL"),
+                 client.escape("eggroll"),
+                 4
+  client.query(stmt)
 #@ _QUOTE_
   puts "Statement:"
   puts stmt
-  puts "Number of rows inserted: #{count}"
-rescue DBI::DatabaseError => e
+  puts "Number of rows inserted: #{client.affected_rows}"
+rescue Mysql2::Error => e
   puts "Oops, the statement failed"
-  puts "Error code: #{e.err}"
-  puts "Error message: #{e.errstr}"
+  puts "Error code: #{e.errno}"
+  puts "Error message: #{e.message}"
 end
 
-dbh.disconnect
+client.close

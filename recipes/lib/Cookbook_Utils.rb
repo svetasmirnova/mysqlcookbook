@@ -1,7 +1,5 @@
 # Cookbook_Utils.rb: MySQL Cookbook utilities
 
-require "dbi"
-
 # Quote an identifier by doubling internal backticks and adding
 # a backtick at the beginning and end.
 

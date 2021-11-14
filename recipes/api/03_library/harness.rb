@@ -4,13 +4,13 @@
 require "Cookbook"
 
 begin
-  dbh = Cookbook.connect
+  client = Cookbook.connect
   print "Connected\n"
-rescue DBI::DatabaseError => e
+rescue Mysql2::Error => e
   puts "Cannot connect to server"
-  puts "Error code: #{e.err}"
-  puts "Error message: #{e.errstr}"
+  puts "Error code: #{e.errno}"
+  puts "Error message: #{e.message}"
   exit(1)
 end
-dbh.disconnect
+client.close
 print "Disconnected\n"
