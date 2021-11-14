@@ -2,7 +2,7 @@
 # cmdline.rb: demonstrate command-line option parsing in Ruby
 
 require "getoptlong"
-require "dbi"
+require "mysql2"
 
 # connection parameters - all missing (nil) by default
 host_name = nil
@@ -31,20 +31,25 @@ end
 # any nonoption arguments remain in ARGV
 # and can be processed here as necessary
 
-# construct data source name
-dsn = "DBI:Mysql:database=cookbook"
-dsn << ";host=#{host_name}" unless host_name.nil?
-
 # connect to server
 begin
-  dbh = DBI.connect(dsn, user_name, password)
+  if !host_name.nil?
+    client = Mysql2::Client.new(:host => host_name, 
+                                :username => user_name, 
+                                :password => password,
+                                :databse => "cookbook")
+  else
+    client = Mysql2::Client.new(:username => user_name, 
+                                :password => password,
+                                :databse => "cookbook")
+  end
   puts "Connected"
-rescue DBI::DatabaseError => e
+rescue Mysql2::Error => e
   puts "Cannot connect to server"
-  puts "Error code: #{e.err}"
-  puts "Error message: #{e.errstr}"
+  puts "Error code: #{e.errno}"
+  puts "Error message: #{e.message}"
   exit(1)
 end
 
-dbh.disconnect()
+client.close
 puts "Disconnected"

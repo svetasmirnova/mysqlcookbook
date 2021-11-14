@@ -1,33 +1,32 @@
 #!/usr/bin/ruby
-# stmt.rb: demonstrate statement processing in Ruby
-# (with and without placeholders)
+# null-in-result.rb: demonstrate NULL values in the result set
+# processing in Ruby
 
 require "Cookbook"
 
 begin
-  dbh = Cookbook.connect
-rescue DBI::DatabaseError => e
+  client = Cookbook.connect
+rescue Mysql2::Error => e
   puts "Cannot connect to server"
-  puts "Error code: #{e.err}"
-  puts "Error message: #{e.errstr}"
+  puts "Error code: #{e.errno}"
+  puts "Error message: #{e.message}"
   exit(1)
 end
 
 begin
-#@ _FETCHLOOP_
-  dbh.execute("SELECT name, birth, foods FROM profile") do |sth|
-    sth.fetch do |row|
-      for i in 0...row.length
-        row[i] = "NULL" if row[i].nil?  # is the column value NULL?
-      end
-      printf "id: %s, name: %s, cats: %s\n", row[0], row[1], row[2]
-    end
+#@ _EACHLOOP_
+  result = client.query("SELECT name, birth, foods FROM profile")
+  result.each do |row|
+    printf "name %s, birth: %s, foods: %s\n", 
+           row["name"].nil? ? "NULL" : row["name"], 
+           row["birth"].nil? ? "NULL" : row["birth"], 
+           row["foods"].nil? ? "NULL" : row["foods"]
   end
-#@ _FETCHLOOP_
-rescue DBI::DatabaseError => e
+#@ _EACHLOOP_
+rescue Mysql2::Error => e
   puts "Oops, the statement failed"
-  puts "Error code: #{e.err}"
-  puts "Error message: #{e.errstr}"
+  puts "Error code: #{e.errno}"
+  puts "Error message: #{e.message}"
 end
 
-dbh.disconnect
+client.close
