@@ -1,4 +1,3 @@
-
 # amazon.sql
 
 # To find out what those products those had “excellent” keyword in reviews
@@ -34,7 +33,7 @@ SELECT COUNT(*) from reviews
 WHERE MATCH(reviews_virtual) AGAINST('excellent product');
 
 SELECT COUNT(*) from reviews
-WHERE MATCH(reviews_text) AGAINST('excellent product for home');
+WHERE MATCH(reviews_virtual) AGAINST('excellent product for home');
 
 SELECT count(*) from reviews WHERE MATCH(reviews_virtual) AGAINST('amazing');
 

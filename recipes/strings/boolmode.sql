@@ -1,24 +1,24 @@
 # boolmode.sql
 
-SELECT COUNT(*) AS 'Abraham' FROM kjv
-WHERE MATCH(vtext) AGAINST('Abraham');
-SELECT COUNT(*) AS 'Sarah' FROM kjv
-WHERE MATCH(vtext) AGAINST('Sarah');
-SELECT COUNT(*) AS 'Abraham or Sarah' FROM kjv
-WHERE MATCH(vtext) AGAINST('Abraham Sarah');
-SELECT COUNT(*) AS 'Abraham' FROM kjv
-WHERE MATCH(vtext) AGAINST('+Abraham' IN BOOLEAN MODE);
-SELECT COUNT(*) AS 'Sarah' FROM kjv
-WHERE MATCH(vtext) AGAINST('+Sarah' IN BOOLEAN MODE);
+SELECT COUNT(*) AS 'good' FROM reviews
+WHERE MATCH(reviews_virtual) AGAINST('good');
+SELECT COUNT(*) AS 'great' FROM reviews
+WHERE MATCH(reviews_virtual) AGAINST('great');
+SELECT COUNT(*) AS 'good or great' FROM reviews
+WHERE MATCH(reviews_virtual) AGAINST('good great');
+SELECT COUNT(*) AS 'good' FROM reviews
+WHERE MATCH(reviews_virtual) AGAINST('+good' IN BOOLEAN MODE);
+SELECT COUNT(*) AS 'great' FROM reviews
+WHERE MATCH(reviews_virtual) AGAINST('+great' IN BOOLEAN MODE);
 
-# The number of verses above containing either Abraham or Sarah
+# The number of verses above containing either good or great
 # should be equal to the sum of the next three statements, which
 # count the number of verses containing both names, just one name,
 # or just the other name.
 
-SELECT COUNT(*) AS 'Abraham and Sarah' FROM kjv
-WHERE MATCH(vtext) AGAINST('+Abraham +Sarah' IN BOOLEAN MODE);
-SELECT COUNT(*) AS 'Abraham, not Sarah' FROM kjv
-WHERE MATCH(vtext) AGAINST('+Abraham -Sarah' IN BOOLEAN MODE);
-SELECT COUNT(*) AS 'Sarah, not Abraham' FROM kjv
-WHERE MATCH(vtext) AGAINST('-Abraham +Sarah' IN BOOLEAN MODE);
+SELECT COUNT(*) AS 'good and great' FROM reviews
+WHERE MATCH(reviews_virtual) AGAINST('+good +great' IN BOOLEAN MODE);
+SELECT COUNT(*) AS 'good, not great' FROM reviews
+WHERE MATCH(reviews_virtual) AGAINST('+good -great' IN BOOLEAN MODE);
+SELECT COUNT(*) AS 'great, not good' FROM reviews
+WHERE MATCH(reviews_virtual) AGAINST('-good +great' IN BOOLEAN MODE);
