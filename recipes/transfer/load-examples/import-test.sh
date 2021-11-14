@@ -80,7 +80,7 @@ DELETE FROM mytbl
 EOF
 
 cp data-colon-cr.txt mytbl.txt
-mysqlimport --local --fields-terminated-by=: --lines-terminated='\r' \
+mysqlimport --local --fields-terminated-by=: --lines-terminated-by='\r' \
   cookbook mytbl.txt
 
 mysql -t cookbook <<EOF

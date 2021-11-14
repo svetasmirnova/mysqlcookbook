@@ -9,7 +9,7 @@ DB=cookbook
 echo "read tab-delimited"
 cp data-tab.txt mytbl.txt
 
-mysql -t $DB <<EOF
+mysql --local-infile -t $DB <<EOF
 DELETE FROM mytbl;
 #@ SAME_AS_DEFAULT_STMT
 LOAD DATA LOCAL INFILE 'mytbl.txt' INTO TABLE mytbl
@@ -38,7 +38,7 @@ EOF
 echo "read tab-delimited (crlf)"
 cp data-tab-crlf.txt mytbl.txt
 
-mysql -t $DB <<EOF
+mysql --local-infile -t $DB <<EOF
 DELETE FROM mytbl;
 #@ _WINDOWS_TAB_DELIMITED_
 LOAD DATA LOCAL INFILE 'mytbl.txt' INTO TABLE mytbl
@@ -52,7 +52,7 @@ EOF
 echo "read CSV (crlf)"
 cp data-csv-crlf.txt mytbl.txt
 
-mysql -t $DB <<EOF
+mysql --local-infile -t $DB <<EOF
 DELETE FROM mytbl;
 #@ _LOAD_CSV_STMT_
 LOAD DATA LOCAL INFILE 'mytbl.txt' INTO TABLE mytbl
@@ -68,7 +68,7 @@ EOF
 echo "read tab-delimited with IGNORE"
 cp data-tab.txt mytbl.txt
 
-mysql -t $DB <<EOF
+mysql --local-infile -t $DB <<EOF
 DELETE FROM mytbl;
 #@ _TAB_WITH_IGNORE_
 LOAD DATA LOCAL INFILE 'mytbl.txt' INTO TABLE mytbl
@@ -83,7 +83,7 @@ EOF
 echo "read merge (cr) with IGNORE"
 cp data-merge-cr.txt mytbl.txt
 
-mysql -t $DB <<EOF
+mysql --local-infile -t $DB <<EOF
 DELETE FROM mytbl;
 #@ _CSV_WITH_IGNORE_
 LOAD DATA LOCAL INFILE 'mytbl.txt' INTO TABLE mytbl
@@ -100,7 +100,7 @@ EOF
 echo "read colon-delimited (cr-terminated)"
 cp data-colon-cr.txt mytbl.txt
 
-mysql -t $DB <<EOF
+mysql --local-infile -t $DB <<EOF
 DELETE FROM mytbl;
 #@ _COLON_CR_
 LOAD DATA LOCAL INFILE 'mytbl.txt' INTO TABLE mytbl
