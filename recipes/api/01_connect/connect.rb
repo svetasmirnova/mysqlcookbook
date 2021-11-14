@@ -1,16 +1,18 @@
 #!/usr/bin/ruby
 # connect.rb: connect to the MySQL server
 
-require "dbi"
+require "mysql2"
 
 begin
-  dsn = "DBI:Mysql:host=localhost;database=cookbook"
-  dbh = DBI.connect(dsn, "cbuser", "cbpass")
+  client = Mysql2::Client.new(:host => "localhost", 
+                              :username => "cbuser",
+                              :password => "cbpass",
+                              :database => "cookbook")
   puts "Connected"
 rescue => e
   puts "Cannot connect to server"
 puts e.backtrace
   exit(1)
 end
-dbh.disconnect
+client.close()
 puts "Disconnected"
