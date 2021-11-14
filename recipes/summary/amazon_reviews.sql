@@ -1,4 +1,3 @@
-
 # amazon_reviews.sql
 
 # Various ways of counting reviews in Amazon Reviews 
