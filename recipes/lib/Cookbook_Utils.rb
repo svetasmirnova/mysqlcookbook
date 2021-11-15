@@ -54,19 +54,18 @@ def get_enumorset_info(client, db_name, tbl_name, col_name)
            WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ? AND COLUMN_NAME = ?")
   res = sth.execute(db_name, tbl_name, col_name)
   return nil if res.count == 0  # no such column
-  res.each do |row|
-    info = {}
-    info["name"] = row.values[0]
-    return nil unless row.values[1] =~ /^(ENUM|SET)\((.*)\)$/i # not ENUM or SET
-    info["type"] = $1
-    # split value list on commas, trim quotes from end of each word
-    info["values"] = $2.split(",").collect { |val| val.sub(/^'(.*)'$/, "\\1") }
-    # determine whether column can contain NULL values
-    info["nullable"] = (row.values[2].upcase == "YES")
-    # get default value (nil represents NULL)
-    info["default"] = row.values[3]
-    return info
-  end
+  row = res.first
+  info = {}
+  info["name"] = row.values[0]
+  return nil unless row.values[1] =~ /^(ENUM|SET)\((.*)\)$/i # not ENUM or SET
+  info["type"] = $1
+  # split value list on commas, trim quotes from end of each word
+  info["values"] = $2.split(",").collect { |val| val.sub(/^'(.*)'$/, "\\1") }
+  # determine whether column can contain NULL values
+  info["nullable"] = (row.values[2].upcase == "YES")
+  # get default value (nil represents NULL)
+  info["default"] = row.values[3]
+  return info
 end
 #@ _GET_ENUMORSET_INFO_
 

@@ -15,8 +15,7 @@ def database_exists(client, db_name)
   sth = client.prepare("SELECT SCHEMA_NAME
                         FROM INFORMATION_SCHEMA.SCHEMATA
                         WHERE SCHEMA_NAME = ?")
-  res = sth.execute(db_name)
-  return res.count > 0
+  return sth.execute(db_name).count > 0
 end
 #@ _DATABASE_EXISTS_
 
