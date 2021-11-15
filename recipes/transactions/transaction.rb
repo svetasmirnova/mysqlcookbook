@@ -14,29 +14,29 @@ require "Cookbook"
 
 # Create the example table and populate it with a couple of rows
 
-def init_table(dbh, tbl_engine)
+def init_table(client, tbl_engine)
   begin
-    dbh.do("DROP TABLE IF EXISTS money")
-    dbh.do("CREATE TABLE money (name CHAR(5), amt INT) ENGINE = " +
+    client.query("DROP TABLE IF EXISTS money")
+    client.query("CREATE TABLE money (name CHAR(5), amt INT) ENGINE = " +
                               tbl_engine)
-    dbh.do("INSERT INTO money (name, amt) VALUES('Eve', 10)")
-    dbh.do("INSERT INTO money (name, amt) VALUES('Ida', 0)")
-  rescue DBI::DatabaseError => e
+    client.query("INSERT INTO money (name, amt) VALUES('Eve', 10)")
+    client.query("INSERT INTO money (name, amt) VALUES('Ida', 0)")
+  rescue Mysql2::Error => e
     puts "Cannot initialize test table"
-    puts "#{e.err}: #{e.errstr}"
+    puts "#{e.errno}: #{e.message}"
   end
 end
 
 # Display the current contents of the example table
 
-def display_table(dbh)
+def display_table(client)
   begin
-    dbh.execute("SELECT name, amt FROM money").each do |row|
-      puts "#{row[0]} has $#{row[1]}"
+      client.query("SELECT name, amt FROM money").each do |row|
+      puts "#{row.values[0]} has $#{row.values[1]}"
     end
-  rescue DBI::DatabaseError => e
+  rescue Mysql2::Error => e
     puts "Cannot display contents of test table"
-    puts "#{e.err}: #{e.errstr}"
+    puts "#{e.errno}: #{e.message}"
   end
 end
 
@@ -45,112 +45,109 @@ tbl_engine = ARGV[0] if ARGV.length > 0
 
 puts "Using storage engine #{tbl_engine} to test transactions"
 
-dbh = Cookbook.connect
+client = Cookbook.connect
 
 # Use commit()/rollback() methods
 
 puts "----------"
 puts "This transaction should succeed."
 puts "Table contents before transaction:"
-init_table(dbh, tbl_engine)
-display_table(dbh)
+init_table(client, tbl_engine)
+display_table(client)
 
 #@ _DO_TRANSACTION_1_
 begin
-  dbh['AutoCommit'] = false
-  dbh.do("UPDATE money SET amt = amt - 6 WHERE name = 'Eve'")
-  dbh.do("UPDATE money SET amt = amt + 6 WHERE name = 'Ida'")
-  dbh.commit
-  dbh['AutoCommit'] = true
-rescue DBI::DatabaseError => e
+  client.query("START TRANSACTION")
+  client.query("UPDATE money SET amt = amt - 6 WHERE name = 'Eve'")
+  client.query("UPDATE money SET amt = amt + 6 WHERE name = 'Ida'")
+  client.query("COMMIT")
+rescue Mysql2::Error => e
   puts "Transaction failed, rolling back. Error was:"
-  puts "#{e.err}: #{e.errstr}"
+  puts "#{e.errno}: #{e.message}"
   begin           # empty exception handler in case rollback fails
-    dbh.rollback
-    dbh['AutoCommit'] = true
+    client.query("ROLLBACK")
   rescue
   end
 end
 #@ _DO_TRANSACTION_1_
 
 puts "Table contents after transaction:"
-display_table(dbh)
+display_table(client)
 
 # Use transaction() method
 
 puts "----------"
 puts "This transaction should succeed."
 puts "Table contents before transaction:"
-init_table(dbh, tbl_engine)
-display_table(dbh)
+init_table(client, tbl_engine)
+display_table(client)
 
 #@ _DO_TRANSACTION_2_
 begin
-  dbh['AutoCommit'] = false
-  dbh.transaction do |dbh|
-    dbh.do("UPDATE money SET amt = amt - 6 WHERE name = 'Eve'")
-    dbh.do("UPDATE money SET amt = amt + 6 WHERE name = 'Ida'")
-  end
-  dbh['AutoCommit'] = true
-rescue DBI::DatabaseError => e
+  client.query("START TRANSACTION")
+  client.query("UPDATE money SET amt = amt - 6 WHERE name = 'Eve'")
+  client.query("UPDATE money SET amt = amt + 6 WHERE name = 'Ida'")
+rescue Mysql2::Error => e
   puts "Transaction failed, rolling back. Error was:"
-  puts "#{e.err}: #{e.errstr}"
-  dbh['AutoCommit'] = true
+  puts "#{e.errno}: #{e.message}"
+  begin
+    client.query("ROLLBACK")
+  rescue
+  end
 end
 #@ _DO_TRANSACTION_2_
 
 puts "Table contents after transaction:"
-display_table(dbh)
+display_table(client)
 
 # Use commit()/rollback() methods
 
 puts "----------"
 puts "This transaction should fail."
 puts "Table contents before transaction:"
-init_table(dbh, tbl_engine)
-display_table(dbh)
+init_table(client, tbl_engine)
+display_table(client)
 
 begin
-  dbh['AutoCommit'] = false
-  dbh.do("UPDATE money SET amt = amt - 6 WHERE name = 'Eve'")
-  dbh.do("UPDATE money SET xamt = xamt + 6 WHERE name = 'Ida'")
-  dbh.commit
-  dbh['AutoCommit'] = true
-rescue DBI::DatabaseError => e
+  client.query("START TRANSACTION")
+  client.query("UPDATE money SET amt = amt - 6 WHERE name = 'Eve'")
+  client.query("UPDATE money SET xamt = xamt + 6 WHERE name = 'Ida'")
+  client.query("COMMIT")
+rescue Mysql2::Error => e
   puts "Transaction failed, rolling back. Error was:"
-  puts "#{e.err}: #{e.errstr}"
+  puts "#{e.errno}: #{e.message}"
   begin           # empty exception handler in case rollback fails
-    dbh.rollback
-    dbh['AutoCommit'] = true
+    client.query("ROLLBACK")
   rescue
   end
 end
 
 puts "Table contents after transaction:"
-display_table(dbh)
+display_table(client)
 
 # Use transaction() method
 
 puts "----------"
 puts "This transaction should fail."
 puts "Table contents before transaction:"
-init_table(dbh, tbl_engine)
-display_table(dbh)
+init_table(client, tbl_engine)
+display_table(client)
 
 begin
-  dbh['AutoCommit'] = false
-  dbh.transaction do |dbh|
-    dbh.do("UPDATE money SET amt = amt - 6 WHERE name = 'Eve'")
-    dbh.do("UPDATE money SET xamt = xamt + 6 WHERE name = 'Ida'")
-  end
-  dbh['AutoCommit'] = true
-rescue DBI::DatabaseError => e
+  client.query("START TRANSACTION")
+  client.query("UPDATE money SET amt = amt - 6 WHERE name = 'Eve'")
+  client.query("UPDATE money SET xamt = xamt + 6 WHERE name = 'Ida'")
+  client.query("COMMIT")
+rescue Mysql2::Error => e
   puts "Transaction failed, rolling back. Error was:"
-  puts "#{e.err}: #{e.errstr}"
-  dbh['AutoCommit'] = true
+  puts "#{e.errno}: #{e.message}"
+  begin
+    client.query("ROLLBACK")
+  rescue
+  end
 end
 
 puts "Table contents after transaction:"
-display_table(dbh)
+display_table(client)
 
-dbh.disconnect
+client.close
