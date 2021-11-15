@@ -6,22 +6,22 @@
 require "Cookbook"
 
 begin
-  dbh = Cookbook.connect
+  client = Cookbook.connect
 rescue DBI::DatabaseError => e
   puts "Cannot connect to server"
-  puts "Error code: #{e.err}"
-  puts "Error message: #{e.errstr}"
+  puts "Error code: #{e.errno}"
+  puts "Error message: #{e.message}"
   exit(1)
 end
 
 #@ _FRAG_
-dbh.do("INSERT INTO invoice (inv_id,date) VALUES(NULL,CURDATE())")
-inv_id = dbh.func(:insert_id)
-sth = dbh.prepare("INSERT INTO inv_item (inv_id,qty,description)
+client.query("INSERT INTO invoice (inv_id,date) VALUES(NULL,CURDATE())")
+inv_id = client.last_id
+sth = client.prepare("INSERT INTO inv_item (inv_id,qty,description)
                    VALUES(?,?,?)")
 sth.execute(inv_id, 1, "hammer")
 sth.execute(inv_id, 3, "nails, box")
 sth.execute(inv_id, 12, "bandage")
 #@ _FRAG_
 
-dbh.disconnect
+client.close

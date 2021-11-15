@@ -5,11 +5,11 @@
 require "Cookbook"
 
 begin
-  dbh = Cookbook.connect
-rescue DBI::DatabaseError => e
+  client = Cookbook.connect
+rescue Mysql2::Error => e
   puts "Cannot connect to server"
-  puts "Error code: #{e.err}"
-  puts "Error message: #{e.errstr}"
+  puts "Error code: #{e.errno}"
+  puts "Error message: #{e.message}"
   exit(1)
 end
 
@@ -17,10 +17,10 @@ end
 # the database handle.
 
 #@ _INSERT_ID_
-dbh.do("INSERT INTO insect (name,date,origin)
+client.query("INSERT INTO insect (name,date,origin)
         VALUES('moth','2014-09-14','windowsill')")
-seq = dbh.func(:insert_id)
+seq = client.last_id
 #@ _INSERT_ID_
 puts "seq: #{seq}"
 
-dbh.disconnect
+client.close
