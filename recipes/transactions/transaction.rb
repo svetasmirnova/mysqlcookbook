@@ -74,8 +74,6 @@ end
 puts "Table contents after transaction:"
 display_table(client)
 
-# Use transaction() method
-
 puts "----------"
 puts "This transaction should succeed."
 puts "Table contents before transaction:"
@@ -100,8 +98,6 @@ end
 puts "Table contents after transaction:"
 display_table(client)
 
-# Use commit()/rollback() methods
-
 puts "----------"
 puts "This transaction should fail."
 puts "Table contents before transaction:"
@@ -124,8 +120,6 @@ end
 
 puts "Table contents after transaction:"
 display_table(client)
-
-# Use transaction() method
 
 puts "----------"
 puts "This transaction should fail."
