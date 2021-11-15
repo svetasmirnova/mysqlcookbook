@@ -11,19 +11,21 @@ require "Cookbook"
 # but you don't have privileges for accessing it.
 
 #@ _DATABASE_EXISTS_
-def database_exists(dbh, db_name)
-  return !dbh.select_one("SELECT SCHEMA_NAME
-                          FROM INFORMATION_SCHEMA.SCHEMATA
-                          WHERE SCHEMA_NAME = ?", db_name).nil?
+def database_exists(client, db_name)
+  sth = client.prepare("SELECT SCHEMA_NAME
+                        FROM INFORMATION_SCHEMA.SCHEMATA
+                        WHERE SCHEMA_NAME = ?")
+  res = sth.execute(db_name)
+  return res.count > 0
 end
 #@ _DATABASE_EXISTS_
 
 begin
-  dbh = Cookbook.connect
-rescue DBI::DatabaseError => e
+  client = Cookbook.connect
+rescue Mysql2::Error => e
   puts "Could not connect to server"
-  puts "Error code: #{e.err}"
-  puts "Error message: #{e.errstr}"
+  puts "Error code: #{e.errno}"
+  puts "Error message: #{e.message}"
 end
 
 if ARGV.length == 0
@@ -33,8 +35,8 @@ end
 
 ARGV.each do |db_name|
   puts "#{db_name}: " +
-    (database_exists(dbh, db_name) ? "exists" : "does not exist")
+    (database_exists(client, db_name) ? "exists" : "does not exist")
 end
 
-dbh.disconnect
+client.close
 

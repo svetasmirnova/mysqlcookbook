@@ -13,21 +13,23 @@ stmt = "SELECT name, birth FROM profile"
 stmt = ARGV[0] if ARGV.length > 0
 
 begin
-  dbh = Cookbook.connect
-rescue DBI::DatabaseError => e
+  client = Cookbook.connect
+rescue Mysql2::Error => e
   puts "Could not connect to server"
-  puts "Error code: #{e.err}"
-  puts "Error message: #{e.errstr}"
+  puts "Error code: #{e.errno}"
+  puts "Error message: #{e.message}"
 end
 
 begin
 #@ _DISPLAY_METADATA_
   puts "Statement: #{stmt}"
-  sth = dbh.execute(stmt)
+  sth = client.prepare(stmt)
+  res = sth.execute()
   # metadata information becomes available at this point ...
-  puts "Number of columns: #{sth.column_names.size}"
-  puts "Note: statement has no result set" if sth.column_names.size == 0
-  sth.column_info.each_with_index do |info, i|
+  puts "Number of columns: #{res.fields.size}"
+  puts "Note: statement has no result set" if res.count == 0
+puts res.first
+  res.fields.each do |info, i|
     puts "--- Column #{i} (#{info['name']}) ---"
     puts "sql_type:         #{info['sql_type']}"
     puts "type_name:        #{info['type_name']}"
@@ -43,11 +45,11 @@ begin
     puts "mysql_max_length: #{info['mysql_max_length']}"
     puts "mysql_flags:      #{info['mysql_flags']}"
   end
-  sth.finish
+  res.free
 #@ _DISPLAY_METADATA_
-rescue DBI::DatabaseError => e
-  puts "Error code: #{e.err}"
-  puts "Error message: #{e.errstr}"
+rescue Mysql2::Error => e
+  puts "Error code: #{e.errno}"
+  puts "Error message: #{e.message}"
 end
 
-dbh.disconnect
+client.close

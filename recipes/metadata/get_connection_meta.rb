@@ -4,16 +4,16 @@
 require "Cookbook"
 
 begin
-  dbh = Cookbook.connect
-rescue DBI::DatabaseError => e
+  client = Cookbook.connect
+rescue Mysql2::Error => e
   puts "Could not connect to server"
-  puts "Error code: #{e.err}"
-  puts "Error message: #{e.errstr}"
+  puts "Error code: #{e.errno}"
+  puts "Error message: #{e.message}"
 end
 
 #@ _CURRENT_DATABASE_
-db = dbh.select_one("SELECT DATABASE()")[0]
+db = client.query("SELECT DATABASE()").first.values[0]
 puts "Default database: " + (db.nil? ? "(no database selected)" : db)
 #@ _CURRENT_DATABASE_
 
-dbh.disconnect
+client.close

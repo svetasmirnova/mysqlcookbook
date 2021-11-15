@@ -11,16 +11,16 @@ db_name = "cookbook"
 tbl_name = "image"
 
 begin
-  dbh = Cookbook.connect
-rescue DBI::DatabaseError => e
+  client = Cookbook.connect
+rescue Mysql2::Error => e
   puts "Could not connect to server"
-  puts "Error code: #{e.err}"
-  puts "Error message: #{e.errstr}"
+  puts "Error code: #{e.errno}"
+  puts "Error message: #{e.message}"
 end
 
 puts "Using get_column_info()"
 puts "Column information for #{db_name}.#{tbl_name} table:"
-info = get_column_info(dbh, db_name, tbl_name)
+info = get_column_info(client, db_name, tbl_name)
 info.each do |col_name, col_info|
   puts "  Column: #{col_name}"
   col_info.each do |col_val_key, col_val|
@@ -28,4 +28,4 @@ info.each do |col_name, col_info|
   end
 end
 
-dbh.disconnect
+client.close

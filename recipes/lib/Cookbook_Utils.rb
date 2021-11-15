@@ -13,11 +13,13 @@ end
 # of the table's columns, in table definition order.
 
 #@ _GET_COLUMN_NAMES_
-def get_column_names(dbh, db_name, tbl_name)
+def get_column_names(client, db_name, tbl_name)
   stmt = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS
           WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ?
           ORDER BY ORDINAL_POSITION"
-  return dbh.select_all(stmt, db_name, tbl_name).collect { |row| row[0] }
+  sth = client.prepare(stmt) 
+  res = sth.execute(db_name, tbl_name)
+  return res.collect { |row| row.values[0] }
 end
 #@ _GET_COLUMN_NAMES_
 
@@ -26,14 +28,14 @@ end
 # a hash keyed by name of column in the INFORMATION_SCHEMA.COLUMNS table.
 
 #@ _GET_COLUMN_INFO_
-def get_column_info(dbh, db_name, tbl_name)
+def get_column_info(client, db_name, tbl_name)
   col_info = {}
   stmt = "SELECT * FROM INFORMATION_SCHEMA.COLUMNS
           WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ?"
-  dbh.execute(stmt, db_name, tbl_name) do |sth|
-    sth.fetch_hash do |row|
-      col_info[row["COLUMN_NAME"]] = row
-    end
+  sth = client.prepare(stmt)
+  res = sth.execute(db_name, tbl_name)
+  res.each do |row|
+    col_info[row["COLUMN_NAME"]] = row
   end
   return col_info
 end

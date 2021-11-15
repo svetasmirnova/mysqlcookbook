@@ -17,15 +17,15 @@ tbl_name = ARGV[1]
 col_name = ARGV[2]
 
 begin
-  dbh = Cookbook.connect
-rescue DBI::DatabaseError => e
+  client = Cookbook.connect
+rescue Mysql2::Error => e
   puts "Could not connect to server"
-  puts "Error code: #{e.err}"
-  puts "Error message: #{e.errstr}"
+  puts "Error code: #{e.errno}"
+  puts "Error message: #{e.message}"
 end
 
 #@ _USE_FUNCTION_
-info = get_enumorset_info(dbh, db_name, tbl_name, col_name)
+info = get_enumorset_info(client, db_name, tbl_name, col_name)
 puts "Information for #{db_name}.#{tbl_name}.#{col_name}:"
 if info.nil?
   puts "No information available (not an ENUM or SET column?)"
@@ -38,4 +38,4 @@ else
 end
 #@ _USE_FUNCTION_
 
-dbh.disconnect
+client.close

@@ -11,21 +11,21 @@ db_name = "cookbook"
 tbl_name = "image"
 
 begin
-  dbh = Cookbook.connect
-rescue DBI::DatabaseError => e
+  client = Cookbook.connect
+rescue Mysql2::Error => e
   puts "Could not connect to server"
-  puts "Error code: #{e.err}"
-  puts "Error message: #{e.errstr}"
+  puts "Error code: #{e.errno}"
+  puts "Error message: #{e.message}"
 end
 
 puts "Using get_column_names()"
 puts "Columns in #{db_name}.#{tbl_name} table:"
-names = get_column_names(dbh, db_name, tbl_name)
+names = get_column_names(client, db_name, tbl_name)
 puts names.join(", ")
 
 puts "Construct statement to select all but data column:"
 #@ _ALL_BUT_
-names = get_column_names(dbh, db_name, tbl_name).reject { |name|
+names = get_column_names(client, db_name, tbl_name).reject { |name|
           name == "data"
         }
 names.collect! { |name| quote_identifier(name) }
@@ -35,4 +35,4 @@ stmt = "SELECT " + names.join(",") + " FROM #{db_name}.#{tbl_name}"
 #@ _ALL_BUT_
 puts stmt
 
-dbh.disconnect
+client.close
