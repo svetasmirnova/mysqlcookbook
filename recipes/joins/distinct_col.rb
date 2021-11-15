@@ -4,11 +4,11 @@
 require "Cookbook"
 
 begin
-  dbh = Cookbook.connect
-rescue DBI::DatabaseError => e
+  client = Cookbook.connect
+rescue Mysql2::Error => e
   puts "Could not connect to server"
-  puts "Error code: #{e.err}"
-  puts "Error message: #{e.errstr}"
+  puts "Error code: #{e.errno}"
+  puts "Error message: #{e.message}"
 end
 
 
@@ -21,22 +21,24 @@ stmt = "
   FROM artist INNER JOIN painting INNER JOIN states
   ON artist.a_id = painting.a_id AND painting.state = states.abbrev
 "
-sth = dbh.execute(stmt)
+res = client.query(stmt)
 # Determine the number of columns in result set rows two ways:
 # - Check sth.column_names.size
 # - Fetch a row into a hash and see how many keys the hash contains
-count1 = sth.column_names.size
-row = sth.fetch_hash
-count2 = row.keys.size
-puts "The statement is: #{stmt}"
-puts "According to column_names_size, the result set has #{count1} columns"
-puts "The column names are: " +
-      sth.column_info.collect { |info| info["name"] }.sort.join(",")
-puts "According to the row hash size, the result set has #{count2} columns"
-puts "The column names are: " + row.keys.sort.join(",")
+count1 = res.fields.size
+res.each do |row|
+  count2 = row.keys.size
+  puts "The statement is: #{stmt}"
+  puts "According to column_names_size, the result set has #{count1} columns"
+  puts "The column names are: " +
+       res.fields.sort.join(",")
+  puts "According to the row hash size, the result set has #{count2} columns"
+  puts "The column names are: " + row.keys.sort.join(",")
+  puts "The counts DO NOT match!" if count1 != count2
+  break
+end
 #@ _FRAG_1_
-puts "The counts DO NOT match!" if count1 != count2
-sth.finish
+res.free
 
 puts ""
 
@@ -50,21 +52,23 @@ stmt = "
   FROM artist INNER JOIN painting INNER JOIN states
   ON artist.a_id = painting.a_id AND painting.state = states.abbrev
 "
-sth = dbh.execute(stmt)
+res = client.query(stmt)
 # Determine the number of columns in result set rows two ways:
 # - Check sth.column_names.size
 # - Fetch a row into a hash and see how many keys the hash contains
-count1 = sth.column_names.size
-row = sth.fetch_hash
-count2 = row.keys.size
-puts "The statement is: #{stmt}"
-puts "According to column_names_size, the result set has #{count1} columns"
-puts "The column names are: " +
-      sth.column_info.collect { |info| info["name"] }.sort.join(",")
-puts "According to the row hash size, the result set has #{count2} columns"
-puts "The column names are: " + row.keys.sort.join(",")
+count1 = res.fields.size
+res.each do |row|
+  count2 = row.keys.size
+  puts "The statement is: #{stmt}"
+  puts "According to column_names_size, the result set has #{count1} columns"
+  puts "The column names are: " +
+       res.fields.sort.join(",")
+  puts "According to the row hash size, the result set has #{count2} columns"
+  puts "The column names are: " + row.keys.sort.join(",")
+  puts "The counts DO NOT match!" if count1 != count2
+  break
+end
 #@ _FRAG_2_
-puts "The counts DO NOT match!" if count1 != count2
-sth.finish
+res.free
 
-dbh.disconnect
+client.close
