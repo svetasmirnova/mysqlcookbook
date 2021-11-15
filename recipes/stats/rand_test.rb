@@ -11,16 +11,19 @@ require "Cookbook"
 npicks = 1000;            # number of times to pick a number
 bucket = Array.new(10, 0) # buckets for counting picks in each interval
 
-dbh = Cookbook.connect()
+client = Cookbook.connect()
 
 1.upto(npicks) do |i|
-  val = dbh.select_one("SELECT RAND()")[0]
-  slot = (val.to_f * 10).to_i
-  slot = 9 if slot > 9    # put 1.0 in last slot
-  bucket[slot] += 1
+  res = client.query("SELECT RAND()")
+  res.each do |row|
+    val = row.values[0]
+    slot = (val.to_f * 10).to_i
+    slot = 9 if slot > 9    # put 1.0 in last slot
+    bucket[slot] += 1
+  end
 end
 
-dbh.disconnect()
+client.close()
 
 # Print the resulting frequency distribution
 
