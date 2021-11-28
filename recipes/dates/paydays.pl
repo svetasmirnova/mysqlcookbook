@@ -1,5 +1,5 @@
 #!/usr/bin/perl
-# paydays.pl: Find all the paydays of the year 2014, assuming that
+# paydays.pl: Find all the paydays of the year 2021, assuming that
 # they fall on the 2nd and 4th Thursdays of each month
 
 use strict;
@@ -12,7 +12,7 @@ my $dbh = Cookbook::connect ();
 # Run a query based on each first-of-month date.
 
 #@ _LOOP_
-my $year = 2014;
+my $year = 2021;
 print "MM/CCYY   2nd Thursday   4th Thursday\n";
 foreach my $month (1..12)
 {
