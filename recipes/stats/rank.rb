@@ -21,11 +21,11 @@ rank = 0
 prev_score = nil
 puts "Row\tRank\tScore\n"
 res.each do |row|
-	score = row.values[0]
-	rownum += 1
-	rank = rownum if rownum == 1 || prev_score != score
-	prev_score = score
-	puts "#{rownum}\t#{rank}\t#{score}"
+  score = row.values[0]
+  rownum += 1
+  rank = rownum if rownum == 1 || prev_score != score
+  prev_score = score
+  puts "#{rownum}\t#{rank}\t#{score}"
 end
 #@ _ASSIGN_RANKS_
 
