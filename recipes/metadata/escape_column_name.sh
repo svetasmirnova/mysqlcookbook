@@ -19,7 +19,7 @@ ruby <<'EOF'
 name = "a_c"
 puts name
 #@ _RUBY_
-name.gsub!(/([%_])/, '\\\\\1')
+name = name.gsub(/([%_])/, '\\\\\1')
 #@ _RUBY_
 puts name
 EOF
