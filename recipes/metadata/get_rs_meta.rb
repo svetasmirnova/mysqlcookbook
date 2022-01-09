@@ -28,23 +28,7 @@ begin
   # metadata information becomes available at this point ...
   puts "Number of columns: #{res.fields.size}"
   puts "Note: statement has no result set" if res.count == 0
-puts res.first
-  res.fields.each do |info, i|
-    puts "--- Column #{i} (#{info['name']}) ---"
-    puts "sql_type:         #{info['sql_type']}"
-    puts "type_name:        #{info['type_name']}"
-    puts "precision:        #{info['precision']}"
-    puts "scale:            #{info['scale']}"
-    puts "nullable:         #{info['nullable']}"
-    puts "indexed:          #{info['indexed']}"
-    puts "primary:          #{info['primary']}"
-    puts "unique:           #{info['unique']}"
-    puts "mysql_type:       #{info['mysql_type']}"
-    puts "mysql_type_name:  #{info['mysql_type_name']}"
-    puts "mysql_length:     #{info['mysql_length']}"
-    puts "mysql_max_length: #{info['mysql_max_length']}"
-    puts "mysql_flags:      #{info['mysql_flags']}"
-  end
+  puts "Columns names: #{res.fields.join(", ")}"
   res.free
 #@ _DISPLAY_METADATA_
 rescue Mysql2::Error => e
