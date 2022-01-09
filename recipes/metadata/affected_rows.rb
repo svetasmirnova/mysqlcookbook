@@ -41,5 +41,5 @@ client = Mysql2::Client.new(:database => "cookbook",
 # be nonzero due to the use of mysql_client_found_rows
 stmt = "UPDATE limbs SET arms = 0 WHERE arms = 0"
 client.query(stmt)
-puts "Number of rows affected: #{client.affected_rows}"
+puts "Number of rows matched: #{client.affected_rows}"
 client.close
