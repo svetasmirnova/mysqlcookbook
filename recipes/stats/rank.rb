@@ -5,17 +5,11 @@ require "Cookbook"
 
 client = Cookbook.connect()
 
-# drop and recreate the t table, then populate it
-
-client.query("DROP TABLE IF EXISTS t")
-client.query("CREATE TABLE t (score INT)")
-client.query("INSERT INTO t (score) VALUES(5),(4),(4),(3),(2),(2),(2),(1)")
-
 # Assign ranks using position (row number) within the set of values,
 # except that tied values all get the rank accorded the first of them.
 
 #@ _ASSIGN_RANKS_
-res = client.query("SELECT score FROM t ORDER BY score DESC")
+res = client.query("SELECT score FROM ranks ORDER BY score DESC")
 rownum = 0
 rank = 0
 prev_score = nil
