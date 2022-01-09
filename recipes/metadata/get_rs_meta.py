@@ -44,7 +44,7 @@ try:
       name, type, _, _, _, _, nullable, flags = col_info
       print("--- Column %d (%s) ---" % (i, name))
       print("Type:     %d (%s)" % (type, FieldType.get_info(type)))
-      print("Nullable: %d" % (nullable))
+      print("Nullable: %d" % (nullable or 0))
       print("Flags:    %d" % (flags))
   cursor.close()
 #@ _DISPLAY_METADATA_
