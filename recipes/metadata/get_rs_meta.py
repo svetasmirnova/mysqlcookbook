@@ -41,7 +41,7 @@ try:
   else:
     for i, col_info in enumerate(cursor.description):
       # print name, then other information
-      name, type, _, _, _, _, nullable, flags, _ = col_info
+      name, type, _, _, _, _, nullable, flags, *_ = col_info
       print("--- Column %d (%s) ---" % (i, name))
       print("Type:     %d (%s)" % (type, FieldType.get_info(type)))
       print("Nullable: %d" % (nullable or 0))
