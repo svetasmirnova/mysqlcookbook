@@ -45,6 +45,9 @@
 # paul@kitebird.com
 # 2002-01-31
 
+# Sveta Smirnova
+# 2022-01-29
+
 # 2002-01-31
 # - Created.
 # 2002-02-19
@@ -70,6 +73,9 @@
 # - Default data type now is VARCHAR, not CHAR.
 # 2006-06-10
 # - Emit UNSIGNED for double/decimal columns if they're unsigned.
+# 2022-01-29
+# - Removed UNSIGNED for double/decimal columns because 
+#   this keyword is deprecated for these types in MySQL 8.0
 
 use strict;
 use warnings;
@@ -163,6 +169,7 @@ my $extra = "";
       if ($info->{integer})
       {
         $s .= "BIGINT";
+        $s .= " UNSIGNED" if $info->{nonnegative};
 # TODO: use range to make guess about type
 # Print "might be YEAR" if in range...(0, 1901-2155)
       }
@@ -170,7 +177,6 @@ my $extra = "";
       {
         $s .= "DOUBLE";
       }
-      $s .= " UNSIGNED" if $info->{nonnegative};
     }
     elsif ($info->{temporal})
     {
