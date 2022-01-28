@@ -281,12 +281,12 @@ def is_valid_time(hour, minute, second):
 # values change from 2000-based to 1900-based.  The default is to switch
 # at 70, like MySQL.  (Thus 00..69 -> 2000..2069 and 70..99 -> 1970..1999)
 
-#@ _YY_TO_CCYY_
-def yy_to_ccyy(year, transition_point = 70):
+#@ _YY_TO_YYYY_
+def yy_to_yyyy(year, transition_point = 70):
   if year < 100:
     year += 1900 if year >= transition_point else 2000
   return year
-#@ _YY_TO_CCYY_
+#@ _YY_TO_YYYY_
 
 
 # Given year and month, return the number of days in the month.  Year

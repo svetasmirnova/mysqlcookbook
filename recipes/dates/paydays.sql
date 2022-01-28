@@ -12,7 +12,7 @@ BEGIN
   DECLARE month INT DEFAULT 1;
   PREPARE stmt FROM '
     SELECT
-      DATE_FORMAT(?,''%m/%Y'') AS ''MM/CCYY'',
+      DATE_FORMAT(?,''%m/%Y'') AS ''MM/YYYY'',
       DATE_ADD(DATE_ADD(?,INTERVAL 5-DAYOFWEEK(?) DAY),
                INTERVAL IF(DAYOFWEEK(?) <= 5, 7, 14) DAY)
         AS ''2nd Thursday'',

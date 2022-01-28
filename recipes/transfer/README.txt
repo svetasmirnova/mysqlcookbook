@@ -4,7 +4,7 @@ information from MySQL or exporting information from MySQL.
 To install any of these utilities, see comments in the README.txt file in
 the main recipes distribution directory.
 
-monddccyy_to_iso.pl: converts dates like Dec. 18, 1787 to ISO format.
+monddyyyy_to_iso.pl: converts dates like Dec. 18, 1787 to ISO format.
 Try it with the statehood.txt file.
 
 The test_date.php script demonstrates how PHP's .Cw strtotime() works.

@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# monddccyy_to_iso.py: Convert dates from mon[.] dd, ccyy to ISO format.
+# monddyyyy_to_iso.py: Convert dates from mon[.] dd, yyyy to ISO format.
 
 # Assumes tab-delimited, linefeed-terminated input
 

@@ -1,5 +1,5 @@
 #!/usr/bin/perl
-# monddccyy_to_iso.pl: Convert dates from mon[.] dd, ccyy to ISO format.
+# monddyyyy_to_iso.pl: Convert dates from mon[.] dd, yyyy to ISO format.
 
 # Assumes tab-delimited, linefeed-terminated input
 
