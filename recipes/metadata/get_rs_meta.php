@@ -39,12 +39,12 @@ try
     $col_info = $sth->getColumnMeta ($i);
     $flags = implode (",", array_values ($col_info["flags"]));
     printf ("--- Column %d (%s) ---\n", $i, $col_info["name"]);
-    printf ("pdo_type:     %d\n", $col_info["pdo_type"]);
-    printf ("native_type:  %s\n", $col_info["native_type"]);
-    printf ("len:          %d\n", $col_info["len"]);
-    printf ("precision:    %d\n", $col_info["precision"]);
-    printf ("flags:        %s\n", $flags);
-    printf ("table:        %s\n", $col_info["table"]);
+    printf ("pdo_type:          %d\n", $col_info["pdo_type"]);
+    printf ("native_type:       %s\n", $col_info["native_type"]);
+    printf ("len:               %d\n", $col_info["len"]);
+    printf ("precision:         %d\n", $col_info["precision"]);
+    printf ("flags:             %s\n", $flags);
+    printf ("table:             %s\n", $col_info["table"]);
   }
 #@ _DISPLAY_METADATA_
 }

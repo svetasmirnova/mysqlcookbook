@@ -14,7 +14,7 @@ func main() {
   }
   defer db.Close()
 
-  stmt := "SELECT city, t, distance, fuel FROM trip_leg"
+  stmt := "SELECT name, birth FROM profile"
   flag.Parse()
   values := flag.Args()
   if len(values) > 0 {
