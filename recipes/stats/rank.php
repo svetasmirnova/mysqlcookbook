@@ -5,13 +5,6 @@ require_once "Cookbook.php";
 
 $dbh = Cookbook::connect ();
 
-# drop and recreate the t table, then populate it
-
-$sth = $dbh->exec ("DROP TABLE IF EXISTS t");
-$sth = $dbh->exec ("CREATE TABLE t (score INT)");
-$sth = $dbh->exec ("INSERT INTO t (score)
-                    VALUES(5),(4),(4),(3),(2),(2),(2),(1)");
-
 # Assign ranks using position (row number) within the set of values,
 # except that tied values all get the rank accorded the first of them.
 

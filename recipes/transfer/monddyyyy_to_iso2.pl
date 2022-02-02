@@ -1,6 +1,6 @@
 #!/usr/bin/perl
-# monddccyy_to_iso2.pl: Convert dates from mon[.] dd, ccyy to ISO format.
-# Just like monddccyy_to_iso.pl, but checks the validity of the dates
+# monddyyyy_to_iso2.pl: Convert dates from mon[.] dd, yyyy to ISO format.
+# Just like monddyyyy_to_iso.pl, but checks the validity of the dates
 # using is_valid_date().
 
 # Assumes tab-delimited, linefeed-terminated input

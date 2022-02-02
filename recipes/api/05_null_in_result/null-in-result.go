@@ -11,7 +11,7 @@ import (
 
 type Profile struct {
 	name     string
-	birthday sql.NullString
+	birth sql.NullString
 	foods    sql.NullString
 }
 
@@ -34,17 +34,17 @@ func main() {
 
 	for res.Next() {
 		var profile Profile
-		err = res.Scan(&profile.name, &profile.birthday, &profile.foods)
+		err = res.Scan(&profile.name, &profile.birth, &profile.foods)
 		if err != nil {
 			log.Fatal(err)
 		}
 
-		if profile.birthday.Valid && profile.foods.Valid {
+		if profile.birth.Valid && profile.foods.Valid {
 			fmt.Printf("name: %s, birth: %s, foods: %s\n",
-				profile.name, profile.birthday.String, profile.foods.String)
-		} else if profile.birthday.Valid {
+				profile.name, profile.birth.String, profile.foods.String)
+		} else if profile.birth.Valid {
 			fmt.Printf("name: %s, birth: %s, foods: NULL\n",
-				profile.name, profile.birthday.String)
+				profile.name, profile.birth.String)
 		} else if profile.foods.Valid {
 			fmt.Printf("name: %s, birth: NULL, foods: %s\n",
 				profile.name, profile.foods.String)

@@ -7,16 +7,10 @@ use Cookbook;
 
 my $dbh = Cookbook::connect ();
 
-# Create the sample table
-
-$dbh->do ("DROP TABLE IF EXISTS t");
-$dbh->do ("CREATE TABLE t (score INT)");
-$dbh->do ("INSERT INTO t (score) VALUES(5),(4),(4),(3),(2),(2),(2),(1)");
-
 # Assign ranks using position (row number) within the set of values,
 # except that tied values all get the rank accorded the first of them.
 
-my $sth = $dbh->prepare ("SELECT score FROM t ORDER BY score DESC");
+my $sth = $dbh->prepare ("SELECT score FROM ranks ORDER BY score DESC");
 $sth->execute ();
 my $rownum = 0;
 my $rank = 0;

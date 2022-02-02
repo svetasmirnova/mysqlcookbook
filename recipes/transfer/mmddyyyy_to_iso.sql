@@ -1,6 +1,6 @@
-# mmddccyy_to_iso.sql
+# mmddyyyy_to_iso.sql
 
-# Show how to load date values that don't follow the ISO (CCYY-MM-DD)
+# Show how to load date values that don't follow the ISO (YYYY-MM-DD)
 # format and convert them to ISO format.  You can use this approach
 # to handle non-ISO input dates that you want to store in a DATE column.
 
@@ -16,7 +16,7 @@ CREATE TABLE datecvt
   d_date  DATE      # date as DATE column
 );
 
-LOAD DATA LOCAL INFILE 'mmddccyy_to_iso.txt' INTO TABLE datecvt (c_date);
+LOAD DATA LOCAL INFILE 'mmddyyyy_to_iso.txt' INTO TABLE datecvt (c_date);
 
 SELECT c_date AS 'original CHAR string' FROM datecvt;
 

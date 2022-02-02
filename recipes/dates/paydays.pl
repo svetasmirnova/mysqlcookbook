@@ -13,7 +13,7 @@ my $dbh = Cookbook::connect ();
 
 #@ _LOOP_
 my $year = 2021;
-print "MM/CCYY   2nd Thursday   4th Thursday\n";
+print "MM/YYYY   2nd Thursday   4th Thursday\n";
 foreach my $month (1..12)
 {
   my $first = sprintf ("%04d-%02d-01", $year, $month);

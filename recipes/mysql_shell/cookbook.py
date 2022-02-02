@@ -27,7 +27,7 @@ def generate_patients_data(num_rows):
   names = pandas.concat([female_names, male_names], ignore_index=True)
   surnames = pandas.read_csv(
     "Names_2010Census.csv", 
-    usecols=['name'], skipfooter=1
+    usecols=['name'], skipfooter=1, engine='python'
   ).rename(columns={'name': 'surname'})
   # diagnosises
   diagnosises = pandas.read_csv('diagnosis.csv')
@@ -60,8 +60,8 @@ def generate_patients_data(num_rows):
       str(random.randrange(100000, 999999))
     age = random.randrange(15, 99)
     date_arrived = datetime.strptime('2020-01-01', '%Y-%m-%d') + \
-      timedelta(seconds=random.randrange(365*24*3600))
-    date_departed = date_arrived + timedelta(seconds=random.randrange(60*24*3600))
+      timedelta(days=random.randrange(365))
+    date_departed = date_arrived + timedelta(days=random.randrange(60))
     date_arrived = date_arrived.strftime('%Y-%m-%d')
     date_departed = date_departed.strftime('%Y-%m-%d')
     name = names['name'][i]

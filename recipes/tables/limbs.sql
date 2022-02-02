@@ -15,7 +15,7 @@ INSERT INTO limbs (thing,legs,arms) VALUES('human',2,2);
 INSERT INTO limbs (thing,legs,arms) VALUES('insect',6,0);
 INSERT INTO limbs (thing,legs,arms) VALUES('squid',0,10);
 INSERT INTO limbs (thing,legs,arms) VALUES('fish',0,0);
-INSERT INTO limbs (thing,legs,arms) VALUES('centipede',100,0);
+INSERT INTO limbs (thing,legs,arms) VALUES('centipede',99,0);
 INSERT INTO limbs (thing,legs,arms) VALUES('table',4,0);
 INSERT INTO limbs (thing,legs,arms) VALUES('armchair',4,2);
 INSERT INTO limbs (thing,legs,arms) VALUES('phonograph',0,1);

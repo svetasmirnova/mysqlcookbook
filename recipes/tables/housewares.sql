@@ -33,22 +33,23 @@ DROP TABLE IF EXISTS housewares2;
 #@ _CREATE_TABLE_HOUSEWARES2__
 CREATE TABLE housewares2
 (
-  category    VARCHAR(3) NOT NULL,
-  serial      INT(5) UNSIGNED ZEROFILL NOT NULL,
-  country     VARCHAR(2) NOT NULL,
+  id          VARCHAR(20) NOT NULL,
+  category    VARCHAR(3) GENERATED ALWAYS AS (left(`id`,3)) STORED,
+  serial      CHAR(5) GENERATED ALWAYS AS (substr(`id`,4,5)) STORED,
+  country     VARCHAR(2) GENERATED ALWAYS AS (right(`id`,2)) STORED,
   description VARCHAR(255),
-  PRIMARY KEY (category, country, serial)
+  PRIMARY KEY (id)
 );
 #@ _CREATE_TABLE_HOUSEWARES2__
 
-INSERT INTO housewares2 (category,serial,country,description)
+INSERT INTO housewares2 (id,description)
   VALUES
-    ('DIN', 40672, 'US', 'dining table'),
-    ('KIT', 372, 'UK', 'garbage disposal'),
-    ('KIT', 1729, 'JP', 'microwave oven'),
-    ('BED', 38, 'SG', 'bedside lamp'),
-    ('BTH', 485, 'US', 'shower stall'),
-    ('BTH', 415, 'JP', 'lavatory')
+    ('DIN40672US', 'dining table'),
+    ('KIT00372UK', 'garbage disposal'),
+    ('KIT01729JP', 'microwave oven'),
+    ('BED00038SG', 'bedside lamp'),
+    ('BTH00485US', 'shower stall'),
+    ('BTH00415JP', 'lavatory')
 ;
 
 SELECT * FROM housewares2;
