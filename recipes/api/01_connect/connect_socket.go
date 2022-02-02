@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	db, err := sql.Open("mysql", "cbuser:cbpass@unix(/tmp/mysql.sock)/cookbook?charset=utf8")
+	db, err := sql.Open("mysql", "cbuser:cbpass@unix(/tmp/mysql.sock)/cookbook?charset=utf8mb4")
 	defer db.Close()
 
 	if err != nil {
