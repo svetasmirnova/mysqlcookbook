@@ -18,14 +18,14 @@ sub get_server_version
 {
 my $dbh = shift;
 my ($ver_str, $ver_num);
-my ($major, $minor, $teeny);
+my ($major, $minor, $patch);
 
   # fetch result into scalar string
   $ver_str = $dbh->selectrow_array ("SELECT VERSION()");
   return undef unless defined ($ver_str);
-  ($major, $minor, $teeny) = split (/\./, $ver_str);
-  $teeny =~ s/\D.*$//; # strip nonnumeric suffix if present
-  $ver_num = $major*10000 + $minor*100 + $teeny;
+  ($major, $minor, $patch) = split (/\./, $ver_str);
+  $patch =~ s/\D.*$//; # strip nonnumeric suffix if present
+  $ver_num = $major*10000 + $minor*100 + $patch;
   return ($ver_str, $ver_num);
 }
 #@ _GET_SERVER_VERSION_
@@ -35,18 +35,18 @@ my ($major, $minor, $teeny);
 # or above the given version.  $version should be specified using digits
 # only, e.g., 32307 for 3.23.7.
 
-# This function assumes that the minor and teeny version parts are < 100.
+# This function assumes that the minor and patch version parts are < 100.
 
 sub require_server_version
 {
 my ($dbh, $required_version) = @_;
-my ($version, $major, $minor, $teeny);
+my ($version, $major, $minor, $patch);
 
   $version = $dbh->selectrow_array ("SELECT VERSION()");
   return 0 unless defined ($version); # fail if can't get version
-  ($major, $minor, $teeny) = split (/\./, $version);
-  $teeny =~ s/-.*//;  # strip suffix
-  $version = $major*10000 + $minor*100 + $teeny;
+  ($major, $minor, $patch) = split (/\./, $version);
+  $patch =~ s/-.*//;  # strip suffix
+  $version = $major*10000 + $minor*100 + $patch;
   return $version >= $required_version;
 }
 #@ _REQUIRE_SERVER_VERSION_

@@ -12,9 +12,9 @@ require "Cookbook"
 def get_server_version(client)
   # fetch result into scalar string
   ver_str = client.query("SELECT VERSION()").first.values[0]
-  major, minor, teeny = ver_str.split(/\./)
-  teeny.sub!(/\D.*$/, "")  # strip nonnumeric suffix if present
-  ver_num = major.to_i*10000 + minor.to_i*100 + teeny.to_i
+  major, minor, patch = ver_str.split(/\./)
+  patch.sub!(/\D.*$/, "")  # strip nonnumeric suffix if present
+  ver_num = major.to_i*10000 + minor.to_i*100 + patch.to_i
   [ver_str, ver_num]
 end
 

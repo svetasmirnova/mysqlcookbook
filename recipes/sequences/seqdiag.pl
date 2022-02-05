@@ -309,13 +309,13 @@ sub get_server_version
 {
 my $dbh = shift;
 my ($ver_str, $ver_num);
-my ($major, $minor, $teeny);
+my ($major, $minor, $patch);
 
   # fetch result into scalar string
   $ver_str = $dbh->selectrow_array ("SELECT VERSION()");
   return undef unless defined ($ver_str);
-  ($major, $minor, $teeny) = split (/\./, $ver_str);
-  $teeny =~ s/\D.*$//; # strip any nonnumeric suffix if present
-  $ver_num = $major*10000 + $minor*100 + $teeny;
+  ($major, $minor, $patch) = split (/\./, $ver_str);
+  $patch =~ s/\D.*$//; # strip any nonnumeric suffix if present
+  $ver_num = $major*10000 + $minor*100 + $patch;
   return ($ver_str, $ver_num);
 }

@@ -9,13 +9,13 @@ delimiter $$
 CREATE FUNCTION server_version()
 RETURNS INT READS SQL DATA
 BEGIN
-  DECLARE major, minor, teeny INT DEFAULT 0;
+  DECLARE major, minor, patch INT DEFAULT 0;
   SET major = SUBSTRING_INDEX(VERSION(),'.',1);
   SET minor = SUBSTRING_INDEX(SUBSTRING_INDEX(VERSION(),'.',2),'.',-1);
   -- implicit conversion to integer here truncates nonnumeric suffix
   SET sql_mode = ''; -- suppress implicit truncation warning
-  SET teeny = SUBSTRING_INDEX(SUBSTRING_INDEX(VERSION(),'.',3),'.',-1);
-  RETURN major * 10000 + minor * 100 + teeny;
+  SET patch = SUBSTRING_INDEX(SUBSTRING_INDEX(VERSION(),'.',3),'.',-1);
+  RETURN major * 10000 + minor * 100 + patch;
 END;
 #@ _DEFINITION_
 $$

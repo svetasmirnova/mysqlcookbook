@@ -17,9 +17,9 @@ def get_server_version(conn):
   cursor.execute("SELECT VERSION()")
   ver_str = cursor.fetchall()[0][0]
   cursor.close()
-  (major, minor, teeny) = ver_str.split('.')
-  teeny = re.sub('\D.*$', "", teeny)  # strip nonnumeric suffix if present
-  ver_num = int(major)*10000 + int(minor)*100 + int(teeny)
+  (major, minor, patch) = ver_str.split('.')
+  patch = re.sub('\D.*$', "", patch)  # strip nonnumeric suffix if present
+  ver_num = int(major)*10000 + int(minor)*100 + int(patch)
   return (ver_str, ver_num)
 
 try:
