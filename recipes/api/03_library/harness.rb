@@ -11,6 +11,7 @@ rescue Mysql2::Error => e
   puts "Error code: #{e.errno}"
   puts "Error message: #{e.message}"
   exit(1)
+ensure
+  client.close
+  print "Disconnected\n"
 end
-client.close
-print "Disconnected\n"
