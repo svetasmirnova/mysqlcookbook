@@ -13,11 +13,11 @@ CREATE TABLE `sundays` (
 
 # Load data by inserting all Sundays in November 2021
 
-INSERT INTO Sundays VALUES(2021,11,7),
+INSERT INTO sundays VALUES(2021,11,7),
                             (2021,11,14),
                             (2021,11,21),
                             (2021,11,28);
 
 # Select the number of Sundays 
-SELECT year, month, BIT_COUNT(BIT_OR(1<<day)) AS days FROM Sundays
+SELECT year, month, BIT_COUNT(BIT_OR(1<<day)) AS days FROM sundays
        GROUP BY year,month;
