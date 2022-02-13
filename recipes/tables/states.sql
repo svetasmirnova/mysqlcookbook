@@ -2,7 +2,7 @@
 
 # US states table:
 # full name, abbreviation, date of statehood (entry into the Union),
-# populations from 2010 census
+# populations from 2021 census
 # Population values were taken from US Census Bureau:
 # http://www.census.gov/
 
