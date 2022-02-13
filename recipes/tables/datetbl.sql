@@ -10,7 +10,8 @@ CREATE TABLE datetbl
   c   CHAR(10),
   d   DATE,
   dt  DATETIME,
-  ts  TIMESTAMP
+  ts  TIMESTAMP,
+  PRIMARY KEY(i)
 );
 #@ _CREATE_TABLE_
 ;

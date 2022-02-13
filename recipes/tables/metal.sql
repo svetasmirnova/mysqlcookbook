@@ -5,7 +5,9 @@
 
 DROP TABLE IF EXISTS metal;
 #@ _CREATE_TABLE_
-CREATE TABLE metal (name VARCHAR(20));
+CREATE TABLE metal (
+  name VARCHAR(20),
+  PRIMARY KEY(name));
 #@ _CREATE_TABLE_
 
 # populate table

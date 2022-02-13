@@ -3,6 +3,7 @@
 DROP TABLE IF EXISTS time_val;
 CREATE TABLE time_val
 (
+  id  INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   t1  TIME,
   t2  TIME
 );

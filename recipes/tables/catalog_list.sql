@@ -7,6 +7,7 @@ DROP TABLE IF EXISTS catalog_list;
 #@ _CREATE_TABLE_
 CREATE TABLE catalog_list
 (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   last_name   CHAR(40) NOT NULL,
   first_name  CHAR(40) NOT NULL,
   street      CHAR(40) NOT NULL

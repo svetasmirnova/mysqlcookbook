@@ -5,6 +5,7 @@
 DROP TABLE IF EXISTS standings2;
 CREATE TABLE standings2
 (
+  id        INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   half      INT,      # which half of season
   division  CHAR(10), # league division
   team      CHAR(20), # team name

@@ -7,7 +7,8 @@ DROP TABLE IF EXISTS al_winner;
 CREATE TABLE al_winner
 (
   name CHAR(30),
-  wins INT
+  wins INT,
+  PRIMARY KEY(name)
 );
 #@ _CREATE_TABLE_
 

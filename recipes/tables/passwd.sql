@@ -11,6 +11,7 @@ CREATE TABLE passwd
   uid       INT,      # user ID
   gid       INT,      # group ID
   gecos     CHAR(60), # name, phone, office, etc.
-  shell     CHAR(60)  # command interpreter
+  shell     CHAR(60),  # command interpreter
+  PRIMARY KEY(account)
 );
 #@ _CREATE_TABLE_

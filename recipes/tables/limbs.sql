@@ -6,7 +6,8 @@ CREATE TABLE limbs
 (
   thing VARCHAR(20),  # what the thing is
   legs  INT,          # number of legs it has
-  arms  INT           # number of arms it has
+  arms  INT,           # number of arms it has
+  PRIMARY KEY(thing)
 );
 #@ _CREATE_TABLE_
 

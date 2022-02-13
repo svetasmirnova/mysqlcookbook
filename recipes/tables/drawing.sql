@@ -2,8 +2,9 @@
 
 DROP TABLE IF EXISTS drawing;
 #@ _CREATE_TABLE_
-CREATE TABLE `drawing` (
-  `entry` int unsigned NOT NULL
+CREATE TABLE drawing (
+  entry int unsigned NOT NULL,
+  PRIMARY KEY(entry)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 #@ _CREATE_TABLE_
 

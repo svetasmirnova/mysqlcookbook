@@ -6,7 +6,8 @@ CREATE TABLE expt
 (
   subject VARCHAR(10),
   test    VARCHAR(5),
-  score INT
+  score INT,
+  PRIMARY KEY(subject, test)
 );
 #@ _CREATE_TABLE_
 

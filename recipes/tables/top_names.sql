@@ -16,7 +16,8 @@ pctblack DECIMAL(2,2),
 pctapi DECIMAL(2,2),
 pctaian DECIMAL(2,2),
 pct2prace DECIMAL(2,2),
-pcthispanic DECIMAL(2,2)
+pcthispanic DECIMAL(2,2),
+PRIMARY KEY(top_name)
 )
 ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 

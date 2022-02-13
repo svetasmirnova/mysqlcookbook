@@ -5,7 +5,8 @@
 DROP TABLE IF EXISTS hostname;
 CREATE TABLE hostname
 (
-  name  VARCHAR(64)
+  name  VARCHAR(64),
+  PRIMARY KEY(name)
 );
 
 INSERT INTO hostname (name)

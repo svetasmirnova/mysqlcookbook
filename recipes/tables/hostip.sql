@@ -8,7 +8,8 @@
 DROP TABLE IF EXISTS hostip;
 CREATE TABLE hostip
 (
-  ip  VARCHAR(64)
+  ip  VARCHAR(64),
+  PRIMARY KEY(ip)
 );
 
 INSERT INTO hostip (ip)

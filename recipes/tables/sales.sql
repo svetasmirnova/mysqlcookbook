@@ -21,6 +21,7 @@ DROP TABLE IF EXISTS sales_volume;
 #@ _CREATE_TABLE_
 CREATE TABLE sales_volume
 (
+  id         INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   region_id  INT UNSIGNED NOT NULL,
   year       INT NOT NULL,
   quarter    INT NOT NULL,

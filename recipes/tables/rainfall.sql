@@ -13,7 +13,8 @@ DROP TABLE IF EXISTS rainfall;
 CREATE TABLE rainfall
 (
   date    DATE NOT NULL,
-  precip  FLOAT(10,2) NOT NULL
+  precip  FLOAT(10,2) NOT NULL,
+  PRIMARY KEY(date)
 );
 #@ _CREATE_TABLE_
 

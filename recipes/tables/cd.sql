@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS cd;
 #@ _CREATE_TABLE_
 CREATE TABLE cd
 (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   year    INT UNSIGNED, # year of issue
   artist  VARCHAR(50),  # artist or group name
   title   VARCHAR(50)   # album title

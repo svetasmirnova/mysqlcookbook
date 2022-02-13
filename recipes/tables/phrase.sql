@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS phrase;
 #@ _CREATE_TABLE_
 CREATE TABLE phrase
 (
-  phrase_val  VARCHAR(255)
+  phrase_val  VARCHAR(255) PRIMARY KEY
 );
 #@ _CREATE_TABLE_
 

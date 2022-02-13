@@ -6,7 +6,8 @@ DROP TABLE IF EXISTS sibling;
 CREATE TABLE sibling
 (
   name  CHAR(20),
-  birth DATE
+  birth DATE,
+  PRIMARY KEY(name)
 );
 
 INSERT INTO sibling (name,birth) VALUES('Ilayda','2002-12-17');

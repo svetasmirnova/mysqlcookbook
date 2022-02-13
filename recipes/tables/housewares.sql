@@ -11,7 +11,8 @@ DROP TABLE IF EXISTS housewares;
 CREATE TABLE housewares
 (
   id      VARCHAR(20),
-  description VARCHAR(255)
+  description VARCHAR(255),
+  PRIMARY KEY(id)
 );
 
 INSERT INTO housewares (id,description)
@@ -58,7 +59,8 @@ DROP TABLE IF EXISTS housewares3;
 CREATE TABLE housewares3
 (
   id      VARCHAR(20),
-  description VARCHAR(255)
+  description VARCHAR(255),
+  PRIMARY KEY(id)
 );
 
 INSERT INTO housewares3 (id,description)
@@ -81,7 +83,8 @@ DROP TABLE IF EXISTS housewares4;
 CREATE TABLE housewares4
 (
   id      VARCHAR(20),
-  description VARCHAR(255)
+  description VARCHAR(255),
+  PRIMARY KEY(id)
 );
 
 INSERT INTO housewares4 (id,description)
@@ -100,7 +103,8 @@ DROP TABLE IF EXISTS hw_category;
 CREATE TABLE hw_category
 (
   abbrev  VARCHAR(3),
-  name  VARCHAR(20)
+  name  VARCHAR(20),
+  PRIMARY KEY(abbrev)
 );
 
 INSERT INTO hw_category (abbrev,name)

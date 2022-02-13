@@ -34,7 +34,10 @@ SELECT * FROM cow_order\G
 
 DROP TABLE IF EXISTS cow_color;
 #@ _CREATE_COW_COLOR_TABLE_
-CREATE TABLE cow_color (color CHAR(20));
+CREATE TABLE cow_color (
+  color CHAR(20),
+  PRIMARY KEY(color)
+);
 #@ _CREATE_COW_COLOR_TABLE_
 
 INSERT INTO cow_color (color)

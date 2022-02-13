@@ -5,7 +5,8 @@ DROP TABLE IF EXISTS book_vendor;
 CREATE TABLE book_vendor
 (
   name    VARCHAR(40),
-  website VARCHAR(80)
+  website VARCHAR(80),
+  PRIMARY KEY(name)
 );
 #@ _CREATE_TABLE_
 

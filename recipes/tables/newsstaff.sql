@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS newsstaff;
 #@ _CREATE_TABLE_
 CREATE TABLE newsstaff
 (
+  id          INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   department  VARCHAR(60) NOT NULL,
   name        VARCHAR(60) NOT NULL,
   email       VARCHAR(60)

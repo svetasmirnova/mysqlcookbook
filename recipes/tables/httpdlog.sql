@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS httpdlog;
 #@ _CREATE_TABLE_
 CREATE TABLE httpdlog
 (
+  id      INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   dt      DATETIME NOT NULL,            # request date
   host    VARCHAR(255) NOT NULL,        # client host
   method  VARCHAR(4) NOT NULL,          # request method (GET, PUT, etc.)

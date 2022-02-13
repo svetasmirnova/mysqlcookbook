@@ -7,7 +7,8 @@ DROP TABLE IF EXISTS occasion;
 CREATE TABLE occasion
 (
   date        DATE,
-  description VARCHAR(255)
+  description VARCHAR(255),
+  PRIMARY KEY(date)
 )
 ;
 

@@ -2,7 +2,10 @@
 
 DROP TABLE IF EXISTS die;
 #@ _CREATE_TABLE_DIE_
-CREATE TABLE die (n INT);
+CREATE TABLE die (
+  n INT,
+  PRIMARY KEY(n)
+);
 #@ _CREATE_TABLE_DIE_
 
 # Insert values 1 through 6, corresponding to faces of a die

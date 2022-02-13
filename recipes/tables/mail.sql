@@ -26,6 +26,7 @@ DROP TABLE IF EXISTS mail;
 #@ _CREATE_TABLE_
 CREATE TABLE mail
 (
+  id      INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   t       DATETIME,    # when message was sent
   srcuser VARCHAR(8),  # sender (source user and host)
   srchost VARCHAR(20),

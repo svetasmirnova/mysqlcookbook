@@ -7,7 +7,8 @@ CREATE TABLE standings1
 (
   team  CHAR(20), # team name
   wins  INT,      # number of wins
-  losses  INT     # number of losses
+  losses  INT,     # number of losses
+  PRIMARY KEY(team)
 );
 
 # Load Northern League final 1902 standings into the table

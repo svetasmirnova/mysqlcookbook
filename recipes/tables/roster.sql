@@ -9,7 +9,8 @@ DROP TABLE IF EXISTS roster;
 CREATE TABLE roster
 (
   name        CHAR(30),   # player name
-  jersey_num  CHAR(3)     # jersey number
+  jersey_num  CHAR(3),     # jersey number
+  PRIMARY KEY(name)
 );
 #@ _CREATE_TABLE_
 

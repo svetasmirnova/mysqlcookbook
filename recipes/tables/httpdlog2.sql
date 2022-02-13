@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS httpdlog2;
 #@ _CREATE_TABLE_
 CREATE TABLE httpdlog2
 (
+  id      INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   dt      DATETIME NOT NULL,            # request date
   vhost   VARCHAR(255) NOT NULL,        # destination virtual host
   host    VARCHAR(255) NOT NULL,        # client host

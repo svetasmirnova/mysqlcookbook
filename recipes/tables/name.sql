@@ -7,7 +7,8 @@ DROP TABLE IF EXISTS name;
 CREATE TABLE name
 (
   last_name   CHAR(20),
-  first_name  CHAR(20)
+  first_name  CHAR(20),
+  PRIMARY KEY(last_name, first_name)
 );
 #@ _CREATE_TABLE_
 
