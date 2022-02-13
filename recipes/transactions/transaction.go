@@ -22,7 +22,7 @@ func initTable(db *sql.DB, tblEngine string) (error) {
   var queries [4]string
   var err error = nil
   queries[0] = "DROP TABLE IF EXISTS money"
-  queries[1] = "CREATE TABLE money (name CHAR(5), amt INT) ENGINE = " + tblEngine
+  queries[1] = "CREATE TABLE money (name CHAR(5), amt INT, PRIMARY KEY(name)) ENGINE = " + tblEngine
   queries[2] = "INSERT INTO money (name, amt) VALUES('Eve', 10)"
   queries[3] = "INSERT INTO money (name, amt) VALUES('Ida', 0)"
 

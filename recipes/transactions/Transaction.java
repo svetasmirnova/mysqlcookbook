@@ -23,7 +23,7 @@ public class Transaction
     {
       Statement s = conn.createStatement ();
       s.executeUpdate ("DROP TABLE IF EXISTS money");
-      s.executeUpdate ("CREATE TABLE money (name CHAR(5), amt INT)"
+      s.executeUpdate ("CREATE TABLE money (name CHAR(5), amt INT, PRIMARY KEY(name))"
                       + " ENGINE = " + tbl_engine);
       s.executeUpdate ("INSERT INTO money (name, amt) VALUES('Eve', 10)");
       s.executeUpdate ("INSERT INTO money (name, amt) VALUES('Ida', 0)");

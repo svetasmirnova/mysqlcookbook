@@ -3,8 +3,7 @@
 DROP TABLE IF EXISTS die;
 #@ _CREATE_TABLE_DIE_
 CREATE TABLE die (
-  n INT,
-  PRIMARY KEY(n)
+  n INT
 );
 #@ _CREATE_TABLE_DIE_
 

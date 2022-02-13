@@ -19,7 +19,7 @@ function init_table ($dbh, $tbl_engine)
   try
   {
     $dbh->exec ("DROP TABLE IF EXISTS money");
-    $dbh->exec ("CREATE TABLE money (name CHAR(5), amt INT)
+    $dbh->exec ("CREATE TABLE money (name CHAR(5), amt INT, PRIMARY KEY(name))
                                    ENGINE = $tbl_engine");
     $dbh->exec ("INSERT INTO money (name, amt)
                                    VALUES('Eve',10)");

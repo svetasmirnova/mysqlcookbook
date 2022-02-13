@@ -22,7 +22,7 @@ import (
 func initTable(ctx context.Context, db *sql.DB, tblEngine string) (error) {
   queries := [4]string {
     "DROP TABLE IF EXISTS money",
-    "CREATE TABLE money (name CHAR(5), amt INT) ENGINE = " + tblEngine,
+    "CREATE TABLE money (name CHAR(5), amt INT, PRIMARY KEY(name)) ENGINE = " + tblEngine,
     "INSERT INTO money (name, amt) VALUES('Eve', 10)",
     "INSERT INTO money (name, amt) VALUES('Ida', 0)",
   }

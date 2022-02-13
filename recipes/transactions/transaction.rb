@@ -17,7 +17,7 @@ require "Cookbook"
 def init_table(client, tbl_engine)
   begin
     client.query("DROP TABLE IF EXISTS money")
-    client.query("CREATE TABLE money (name CHAR(5), amt INT) ENGINE = " +
+    client.query("CREATE TABLE money (name CHAR(5), amt INT, PRIMARY KEY(name)) ENGINE = " +
                               tbl_engine)
     client.query("INSERT INTO money (name, amt) VALUES('Eve', 10)")
     client.query("INSERT INTO money (name, amt) VALUES('Ida', 0)")

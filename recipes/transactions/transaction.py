@@ -20,7 +20,7 @@ def init_table(conn, tbl_engine):
   try:
     cursor = conn.cursor()
     cursor.execute("DROP TABLE IF EXISTS money")
-    cursor.execute("CREATE TABLE money (name CHAR(5), amt INT) ENGINE = "
+    cursor.execute("CREATE TABLE money (name CHAR(5), amt INT, PRIMARY KEY(name)) ENGINE = "
                               + tbl_engine)
     cursor.execute("INSERT INTO money (name, amt) VALUES('Eve', 10)")
     cursor.execute("INSERT INTO money (name, amt) VALUES('Ida', 0)")

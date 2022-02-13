@@ -78,7 +78,7 @@ my ($dbh, $tbl_engine) = @_;
 
   $dbh->{AutoCommit} = 1; # enable auto-commit
   $dbh->do ("DROP TABLE IF EXISTS money");
-  $dbh->do ("CREATE TABLE money (name CHAR(5), amt INT) ENGINE = $tbl_engine");
+  $dbh->do ("CREATE TABLE money (name CHAR(5), amt INT, PRIMARY KEY(name)) ENGINE = $tbl_engine");
   $dbh->do ("INSERT INTO money (name, amt) VALUES('Eve', 10)");
   $dbh->do ("INSERT INTO money (name, amt) VALUES('Ida', 0)");
 }
