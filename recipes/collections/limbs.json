@@ -2,7 +2,7 @@
 {"arms": 0, "legs": 6, "thing": "insect" } 
 {"arms": 10, "legs": 0, "thing": "squid" } 
 {"arms": 0, "legs": 0, "thing": "fish" } 
-{"arms": 0, "legs": 100, "thing": "centipede" } 
+{"arms": 0, "legs": 99, "thing": "centipede" } 
 {"arms": 0, "legs": 4, "thing": "table" } 
 {"arms": 2, "legs": 4, "thing": "armchair" } 
 {"arms": 1, "legs": 0, "thing": "phonograph" } 
