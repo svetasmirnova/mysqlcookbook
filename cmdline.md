@@ -243,3 +243,66 @@ Variables,’’ then set CLASSPATH to this value:
 Adjust the instructions for the pathname actually used on your system. You might also need to add other
 class directories or libraries to your ***CLASSPATH*** setting. The specifics depend on how your system is set
 up.
+
+## Compiling and Executing Go Lang Programs
+
+To compile and run Go programs that use MySQL you will need *GO SQL Driver*. This book uses 
+[Go-MySQL-Driver](https://github.com/go-sql-driver/mysql). To obtain it if it’s not already installed, install Git, then issue the following command.
+```go 
+$ go get -u github.com/go-sql-driver/mysql
+```
+
+### Setting the GOPATH and GOROOT
+
+***GOPATH*** is an environment variable that tells the GO binary where to look for the code.
+In order to set *GOPATH* use the similar methods mentione above on *Linux* based operating systems. 
+
+While there are different bash files that can be present on one’s system, on Ubuntu or other Linux based operating systems, it is generally recommended to make use of the *bash_rc* which you can open with typing the following command in your terminal.
+
+```bash
+vi ~/.bashrc
+```
+
+You can also set the ***GOPATH** directly on your system:
+
+```bash
+export GOPATH=/root/go_projects
+```
+
+Inside the GOPATH we need to have following subfolders:
+
+- ***pkg*** - The directory that will contain the packages and shared object files.
+- ***src*** - The directory where all the go code exits.
+- ***bin*** - The directory that will contain all the binary executables compiled. 
+
+Setting the ***GOROOT*** inside ***bashrc*** or ***bash_profile*** file is also important similar to ***GOPATH***. 
+
+```bash
+export GOROOT=/usr/local/go
+```
+
+You can source *bashrc* file. 
+
+```bash
+source ~/.bashrc
+```
+
+Verify that you have correctly set ***GOPATH*** 
+
+Running examples in *recipes* distribution [recipes](https://github.com/svetasmirnova/mysqlcookbook/tree/master/recipes/api/01_connect)
+may require some *GO* environment variables settings. If you recieve the following error:
+```go
+$ go run connect.go
+connect.go:9:5: no required module provides package github.com/go-sql-driver/mysql: go.mod file not found in current directory or any parent directory; see 'go help modules'
+```
+Run following to fix the issue by setting *GO111MODULE* setting to ***auto***.  
+```bash
+$ go env -w GO111MODULE=auto
+```
+Verify scripts are working:
+
+```bash
+$ go run connect.go
+Connected!
+```
+
