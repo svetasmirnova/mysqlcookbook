@@ -252,7 +252,7 @@ $ go get -u github.com/go-sql-driver/mysql
 ### Setting the GOPATH and GOROOT
 
 ***GOPATH*** is an environment variable that tells the GO binary where to look for the code.
-In order to set *GOPATH* use the similar methods mentione above on *Linux* based operating systems. 
+In order to set *GOPATH* use the similar methods mentioned above on *Linux* based operating systems. 
 
 While there are different bash files that can be present on one’s system, on Ubuntu or other Linux based operating systems, it is generally recommended to make use of the *bash_rc* which you can open with typing the following command in your terminal.
 
@@ -289,7 +289,7 @@ Verify that you have correctly set ***GOPATH***
 Running examples in *recipes* distribution [recipes](https://github.com/svetasmirnova/mysqlcookbook/tree/master/recipes/api/01_connect)
 may require some *GO* environment variables settings. 
 
-If you recieve the following error:
+If you receive the following error:
 ```go
 $ go run connect.go
 connect.go:9:5: no required module provides package github.com/go-sql-driver/mysql: go.mod file not found in current directory or any parent directory; see 'go help modules'
