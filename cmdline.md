@@ -7,9 +7,9 @@ in the book, but as of the third edition is available separately. There are seve
 the recipes software distribution. To obtain this distribution, which accompanies MySQL Cookbook 4th Edition,
 visit the companion web site:
 
-https://github.com/svetasmirnova/mysqlcookbook
+[MySQL Cookbook](https://github.com/svetasmirnova/mysqlcookbook)
 
-As you work through MySQL Cookbook 4th Edition, you run many examples using the mysql client program, and there are lots of programs in the recipes distribution for you to try as you read. And of course one purpose of the book is to enable you to write your own MySQL-based programs. Consequently, you must often execute programs at the command line—that is, at the prompt of your shell or command interpreter. Forbest use of this book, you should also be able to run mysql easily (by entering just its name), and you should be able to execute programs from the recipes distribution or that you write yourself. To accomplish those goals, it’s important that your PATH environment variable be set correctly, and that you know how to make programs executable. The discussion here shows how to do those things.
+As you work through MySQL Cookbook 4th Edition, you run many examples using the mysql client program, and there are lots of programs in the recipes distribution for you to try as you read. And of course one purpose of the book is to enable you to write your own MySQL-based programs. Consequently, you must often execute programs at the command line that is, at the prompt of your shell or command interpreter. Forbest use of this book, you should also be able to run mysql easily (by entering just its name), and you should be able to execute programs from the recipes distribution or that you write yourself. To accomplish those goals, it’s important that your PATH environment variable be set correctly, and that you know how to make programs executable. The discussion here shows how to do those things.
 
 ## Setting Environment Variables
 
@@ -104,6 +104,7 @@ A script-execution method that works on any platform is to invoke the perl progr
 the script to run:
 
 ***$ perl perldemo.pl***
+
 I am a Perl program.
 
 For a script written in another language, invoke the *ruby, php, or python* program.
@@ -111,7 +112,7 @@ For a script written in another language, invoke the *ruby, php, or python* prog
 It’s also possible to make a script directly executable. The procedure differs for Unix and Windows. Both
 procedures are described here.
 
-On Unix, to make a script directly executable, include a line at the top of the file that begins with #! and
+On Linux, to make a script directly executable, include a line at the top of the file that begins with #! and
 that specifies the pathname of the program that should execute the script. Here is a script named
 *perldemo2.pl* with a #! line that names the perl program (if *perl* is not located at */usr/bin/perl* on your system,
 change the pathname):
@@ -145,6 +146,7 @@ might even create the association for you.) Then you can invoke a script with a 
 from the command line without naming its language interpreter:
 
 ***C:\> perldemo.pl***
+
 I am a Perl program.
 
 No leading path is needed to invoke a script that is located in the current directory because the Windows
@@ -209,11 +211,6 @@ file containing the program should match this name and include a .java extension
 program is JavaDemo.java. Compile the program using *javac*:
 
 *$ javac JavaDemo.java*
-
-If you prefer a different Java compiler, just substitute its name. For example, if you’d rather use Jikes, compile
-the file like this instead:
-
-*$ jikes JavaDemo.java*
 
 The Java compiler generates compiled byte code to produce a class file named *JavaDemo.class*. Use the
 *java* program to run the class file (specified without the *.class* extension):
@@ -290,7 +287,9 @@ source ~/.bashrc
 Verify that you have correctly set ***GOPATH*** 
 
 Running examples in *recipes* distribution [recipes](https://github.com/svetasmirnova/mysqlcookbook/tree/master/recipes/api/01_connect)
-may require some *GO* environment variables settings. If you recieve the following error:
+may require some *GO* environment variables settings. 
+
+If you recieve the following error:
 ```go
 $ go run connect.go
 connect.go:9:5: no required module provides package github.com/go-sql-driver/mysql: go.mod file not found in current directory or any parent directory; see 'go help modules'
