@@ -5,15 +5,15 @@
 Note: This is a MySQL Cookbook 4th Edition auxiliary document. Much of its content originally was an appendix
 in the book, but as of the third edition is available separately. There are several references here to
 the recipes software distribution. To obtain this distribution, which accompanies MySQL Cookbook 4th Edition,
-visit the companion web site:
+visit the companion website:
 
 [MySQL Cookbook](https://github.com/svetasmirnova/mysqlcookbook)
 
-As you work through MySQL Cookbook 4th Edition, you run many examples using the mysql client program, and there are lots of programs in the recipes distribution for you to try as you read. And of course one purpose of the book is to enable you to write your own MySQL-based programs. Consequently, you must often execute programs at the command line that is, at the prompt of your shell or command interpreter. Forbest use of this book, you should also be able to run mysql easily (by entering just its name), and you should be able to execute programs from the recipes distribution or that you write yourself. To accomplish those goals, it’s important that your PATH environment variable be set correctly, and that you know how to make programs executable. The discussion here shows how to do those things.
+As you work through MySQL Cookbook 4th Edition, you run many examples using the MySQL client program, and there are many programs in the recipes distribution for you to try as you read. And of course, one purpose of the book is to enable you to write your own MySQL-based programs. Consequently, you must often execute programs at the command line, at the prompt of your shell or command interpreter. For best use of this book, you should also be able to run MySQL quickly (by entering just its name), and you should be able to execute programs from the recipes distribution or that you write yourself. To accomplish those goals, it’s important that your PATH environment variable be set correctly and that you know how to make programs executable. The discussion here shows how to do those things.
 
 ## Setting Environment Variables
 
-An environment variable has a value that can be accessed by programs as they run. By setting environment variables, you modify your operating environment. One such variable is PATH, which is used by your command interpreter to determine which directories to search when it looks for programs such as mysql that you tell it to execute. If your PATH is set correctly, you can invoke programs easily no matter what your current directory is. If PATH is not set correctly, your command interpreter will not find them. For example, if the PATH value does not include the directory where mysql is installed, a ‘‘command not found’’ error may occur if you attempt to run mysql by entering its name. You must then run it either by specifying its full pathname, or by changing location into the directory where it is installed. Both strategies are inconvenient, and more so with repetition. It’s much better to set your PATH value to name the directories containing the programs you want to use.
+An environment variable has a value that can be accessed by programs as they run. By setting environment variables, you modify your operating environment. One such variable is PATH, which is used by your command interpreter to determine which directories to search when it looks for programs such as MySQL that you tell it to execute. If your PATH is set correctly, you can invoke programs easily no matter what your current directory is. If PATH is not set correctly, your command interpreter will not find them. For example, if the PATH value does not include the directory where MySQL is installed, a ‘‘command not found’’ error may occur if you attempt to run MySQL by entering its name. You must then run it either by specifying its full pathname, or by changing location into the directory where it is installed. Both strategies are inconvenient, and more so with repetition. It’s much better to set your PATH value to name the directories containing the programs you want to use.
 
 Other environment variables are important in other contexts. For example, to run Perl or Ruby scripts that use module files that you’ve installed, you may need to set the PERL5LIB or RUBYLIB variable to tell Perl or Ruby where to find those modules. For Java, the JAVA_HOME variable should be set to indicate the location of your Java installation, and CLASSPATH should be set to the list of libraries and class files that your Java programs need.
 
@@ -52,8 +52,7 @@ exports the PATH variable:
 
 - Change the setting to this:
 
-*PATH=/usr/local/mysql/bin:/bin:/usr/bin:/usr/local/bin* 
-export PATH
+*PATH=/usr/local/mysql/bin:/bin:/usr/bin:/usr/local/bin;export PATH*
 
 - For a shell in the C shell family (csh, tcsh), look in your startup files for a setenv PATH command:
 
@@ -76,7 +75,7 @@ value like this:
 
 *C:\WINDOWS;C:\WINDOWS\COMMAND* 
 
-To make it easier to run MySQL programs such as mysql, change the value to include the directory where
+To make it easier to run MySQL programs such as *mysql*, change the value to include the directory where
 those programs are installed. Adding a directory of C:\Program Files\MySQL\MySQL Server 8.0\bin
 results in a PATH setting that should look like this:
 
