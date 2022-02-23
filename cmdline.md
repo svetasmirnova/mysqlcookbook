@@ -248,7 +248,7 @@ To compile and run Go programs that use MySQL you will need *GO SQL Driver*. Thi
 $ go get -u github.com/go-sql-driver/mysql
 ```
 
-### Setting the GOPATH and GOROOT
+### Setting the GOPATH
 
 ***GOPATH*** is an environment variable that tells the GO binary where to look for the code.
 In order to set *GOPATH* use the similar methods mentioned above on *Linux* based operating systems. 
@@ -270,12 +270,6 @@ Inside the GOPATH we need to have following subfolders:
 - ***pkg*** - The directory that will contain the packages and shared object files.
 - ***src*** - The directory where all the go code exits.
 - ***bin*** - The directory that will contain all the binary executables compiled. 
-
-Setting the ***GOROOT*** inside ***bashrc*** or ***bash_profile*** file is also important similar to ***GOPATH***. 
-
-```bash
-export GOROOT=/usr/local/go
-```
 
 You can source *bashrc* file. 
 
