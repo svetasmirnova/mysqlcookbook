@@ -28,7 +28,7 @@ Executing Programs from the Command Line
 Your choice of command interpreter determines the syntax for setting environment variables. In addition, for settings that you put in a startup file, the file to use is interpreter-specific. The following table shows typical startup files for commonly used Unix command interpreters. If you’ve never looked through your command interpreter’s startup files, it’s a good idea to do so to familiarize yourself with their contents.
 | ***Command interpreter***      |  ***Possible startup files*** |
 |---|---|
-| *sh, bash, ksh* |  .profile, .bash_profile, .bash_login, .bashrc |
+| sh, bash, ksh |  .profile, .bash_profile, .bash_login, .bashrc |
 | csh, tcsh       | .login, .cshrc, .tcshrc
 
 The examples assume that MySQL programs are installed in the /usr/local/mysql/bin directory; adjust the
@@ -106,8 +106,7 @@ For a script written in another language, invoke the `ruby`, `php`, or `python` 
 It’s also possible to make a script directly executable. The procedure differs for Unix and Windows. Both
 procedures are described here.
 
-On Linux, to make a script directly executable, include a line at the top of the file that begins with `#!` and
-that specifies the pathname of the program that should execute the script. Here is a script named
+On Linux, to make a script directly executable, include a line at the top of the file that begins with `#!` and that specifies the pathname of the program that should execute the script. Here is a script named
 `perldemo2.pl` with a `#!` line that names the perl program (if `perl` is not located at `/usr/bin/perl` on your system,
 change the pathname):
 
@@ -260,6 +259,13 @@ Variables," then set CLASSPATH to this value:
 Adjust the instructions for the pathname actually used on your system. You might also need to add other
 class directories or libraries to your `CLASSPATH` setting. The specifics depend on how your system is set
 up.
+
+If your program consists of a single binary you can omit the compilation step and simply run it:
+
+```
+$ java ./JavaDemo.java
+I am a Java program.
+```
 
 ## Compiling and Executing Go Lang Programs
 
