@@ -28,8 +28,7 @@ public class GetTableNames
       // result set columns are the same; the third column will be
       // a different table name in each row.
 //#@ _FRAG_
-      // get list of tables in database named by dbName; if
-      // dbName is the empty string, the default database is used
+      // get list of tables in database named by dbName
       DatabaseMetaData md = conn.getMetaData ();
       ResultSet rs = md.getTables (dbName, "", "%", null);
       while (rs.next ())
