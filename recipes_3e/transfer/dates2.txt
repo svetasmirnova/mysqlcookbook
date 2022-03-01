@@ -1,4 +1,0 @@
-# dates intended for parsing using various date part delimiters
-2000-2-3
-2000/2/3
-2000,2,3
