@@ -3,7 +3,7 @@ the instructions in the companion document "Executing Programs from
 the Command Line" that illustrate how to run programs from the
 command line.
 
-That document is available at: http://www.kitebird.com/mysql-cookbook
+That document is available at:  https://github.com/svetasmirnova/mysqlcookbook/blob/master/cmdline.md
 
 perldemo.pl, rubydemo.pl, phpdemo.php,and pythondemo.py have no
 shebang (#!) line that names the appropriate language processor,
