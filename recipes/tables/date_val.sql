@@ -16,3 +16,8 @@ INSERT INTO date_val (d) VALUES('1900-01-15');
 INSERT INTO date_val (d) VALUES('1999-12-31');
 INSERT INTO date_val (d) VALUES('2000-06-04');
 INSERT INTO date_val (d) VALUES('2017-03-16');
+
+
+# Select
+
+SELECT d, DAYNAME(d), DATE_FORMAT(d, '%a') FROM date_val;
