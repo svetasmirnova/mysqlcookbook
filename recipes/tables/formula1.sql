@@ -6,8 +6,8 @@ DROP TABLE IF EXISTS `formula1`;
 #@ _CREATE_TABLE_
 CREATE TABLE `formula1` (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    position INT(2) UNSIGNED,
-    no       INT(2) UNSIGNED,
+    position INT UNSIGNED,
+    no       INT UNSIGNED,
     driver   VARCHAR(25),
     car      VARCHAR(25),
     laps     SMALLINT,
@@ -29,7 +29,7 @@ SELECT MIN(time) from formula1 into @fastest;
 # Select the race standings
 WITH time_gap AS (
   SELECT
-    position as pos,
+    position,
     car,
     driver,
     time,
@@ -39,7 +39,7 @@ WITH time_gap AS (
  
 differences AS (
   SELECT
-    pos,
+    position as pos,
     driver,
     car,
     time,
@@ -54,11 +54,10 @@ SELECT
   driver,
   time,
   CONCAT(
-    FLOOR(minutes_part / 60), 'm',
-    seconds_part, 's'
+    FLOOR(minutes_part / 60), ' min ',
+    SUBSTRING_INDEX(SUBSTRING_INDEX(seconds_part,'-',2),'-',-1),' secs'
   ) AS difference
 FROM differences;
-
 # Formatted select
 
 select position as pos,
@@ -68,4 +67,4 @@ select position as pos,
         laps,
         date_format(time,'%H:%i:%s:%f') as time,
          points as pts
-   from formula1;
+   from formula1 ORDER BY time;
