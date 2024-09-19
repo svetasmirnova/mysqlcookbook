@@ -22,4 +22,4 @@ To import individual collections use scripts in the `collections` directory.
 
 We used few public datasets which are located in the `datasets` directory together with their licences.
 
-"MySQL Cookbook 3th Edition" was written by Paul DuBois and many scripts in this repository are based on his work. Original scripts for the "MySQL Cookbook 3th Edition" are available at [MySQL Cookbook, Third Edition - Downloads](http://www.kitebird.com/mysql-cookbook/downloads-3ed.php)
+"MySQL Cookbook 3th Edition" was written by Paul DuBois and many scripts in this repository are based on his work. Original scripts for the "MySQL Cookbook 3th Edition" are available at [MySQL Cookbook, Third Edition - Downloads](https://web.archive.org/web/20220522130024/http://www.kitebird.com/mysql-cookbook/downloads-3ed.php)
